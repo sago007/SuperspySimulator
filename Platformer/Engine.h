@@ -84,8 +84,8 @@ namespace Engine2D
 		void PopState();
 		void StopTextInput();
 
-		void Engine::BeginScreenTransition(int d);
-		void Engine::UpdateTransition(float deltaTime);
+		void BeginScreenTransition(int d);
+		void UpdateTransition(float deltaTime);
 
 		bool Transitioned();
 		bool Darkened();

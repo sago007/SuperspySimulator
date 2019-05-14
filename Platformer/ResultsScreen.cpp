@@ -79,7 +79,8 @@ namespace Platformer
 
 				this->stage++;
 
-				PlaySound(this->stageEffect, &AABB(1, 1, 1, 1), 0);
+				auto boundSound = AABB(1, 1, 1, 1);
+				PlaySound(this->stageEffect, &boundSound, 0);
 
 				if (this->stage < RESULTS_MAX_STAGE)
 				{
@@ -104,8 +105,8 @@ namespace Platformer
 
 			if (this->stage < RESULTS_MAX_STAGE)
 			{
-
-				PlaySound(this->stageEffect, &AABB(1, 1, 1, 1), 0);
+				auto boundSound = AABB(1, 1, 1, 1);
+				PlaySound(this->stageEffect, &boundSound, 0);
 
 				this->stage = RESULTS_MAX_STAGE;
 

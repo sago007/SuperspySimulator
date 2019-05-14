@@ -6,3 +6,5 @@ Release.zip
 Platformer/Platformer.vcxproj
 Platformer.vcxproj
 Platformer/Platformer.aps
+*.o
+.deps

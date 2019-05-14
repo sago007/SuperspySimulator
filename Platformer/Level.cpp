@@ -615,7 +615,8 @@ namespace Platformer
 
 						Breakable* breakableMaster = new Breakable(code);
 						breakableMaster->SetLevel(this);
-						breakableMaster->LoadEntity(std::ifstream(line), true);
+						auto lineStream = std::ifstream(line);
+						breakableMaster->LoadEntity(lineStream, true);
 
 						this->breakables[line] = breakableMaster;
 

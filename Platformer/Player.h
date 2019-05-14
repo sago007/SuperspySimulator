@@ -99,20 +99,20 @@ namespace Platformer
 		bool jumpKeyUp = true;
 
 		bool oneWay = true;
-		double oneWayTime;
+		double oneWayTime = 0.0;
 
 		float movementSpeed = 200;
 		float jumpSpeed = -250;
 		float jumpAcceleration = -2400;
-		int jumpTime;
+		int jumpTime = 0;
 
-		ScriptedAction* scripted;
+		ScriptedAction* scripted = nullptr;
 
-		Weapon* weapon;
+		Weapon* weapon = nullptr;
 
-		Mix_Chunk* jumpEffect;
+		Mix_Chunk* jumpEffect = nullptr;
 		
-		Platformer* parent;
+		Platformer* parent = nullptr;
 
 		std::vector<Item*> inventory;
 

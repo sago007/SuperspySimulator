@@ -1,5 +1,6 @@
 //Includes
 #include <sstream>
+#include <algorithm>
 
 //Custom Includes
 #include "Helpers.h"
@@ -88,7 +89,8 @@ namespace Platformer
 
 			this->LoadLevel(argv[0], spawn);
 
-			this->player->LoadEntity(std::ifstream(argv[2]), true);
+			auto arg2stream = std::ifstream(argv[2]);
+			this->player->LoadEntity(arg2stream, true);
 
 			this->player->Move(this->level->SpawnIndex(spawn));
 
