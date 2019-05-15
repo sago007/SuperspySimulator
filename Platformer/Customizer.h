@@ -93,8 +93,8 @@ namespace Platformer
 		Customizer(bool r = false);
 		~Customizer();
 
-		void Initialize(int argc, char* argv[]);
-		void LoadContent(int argc, char* argv[]);
+		void Initialize(int argc, char* argv[]) override;
+		void LoadContent(int argc, char* argv[]) override;
 
 		void Update(float deltaTime);
 		void Render(float deltaTime);

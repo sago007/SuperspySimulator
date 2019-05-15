@@ -2,6 +2,7 @@
 #include <fstream>
 #include <sstream>
 #include <filesystem>
+#include <iostream>
 
 //Custom Includes
 #include "Helpers.h"
@@ -56,7 +57,7 @@ namespace Platformer
 
 		std::vector<std::string> characters;
 
-		for (const auto& entry : std::filesystem::directory_iterator(SAVE_DIRECTORY))
+		for (auto& entry : std::filesystem::directory_iterator(SAVE_DIRECTORY))
 		{
 
 			if (entry.path().extension().string() == ".plSAV")
@@ -64,7 +65,7 @@ namespace Platformer
 
 				std::string name = entry.path().filename().string();
 				characters.push_back(name.substr(0, name.find(".")));
-
+				std::cerr << "Pushed: " << characters.back() << "\n";
 			}
 
 		}

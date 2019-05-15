@@ -24,6 +24,7 @@ namespace Platformer
 
 		virtual void Hit(GameEntity* entity) = 0;
 		virtual int Damage();
+		virtual ~HitComponent() = default;
 
 	protected:
 

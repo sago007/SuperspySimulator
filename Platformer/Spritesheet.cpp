@@ -383,8 +383,10 @@ namespace Engine2D
 
 	void Spritesheet::Render(Vector2 pos, bool flip)
 	{
-
-		Frame* frame = this->animations[(this->currentAnimation == -1 ? 0 : this->currentAnimation)].CurrentFrame();
+		if (animations.size()<=currentAnimation || currentAnimation < 0) {
+			return;
+		}
+		Frame* frame = this->animations.at(this->currentAnimation == -1 ? 0 : this->currentAnimation).CurrentFrame();
 		SDL_Rect src, dest;
 
 		if (frame == NULL)

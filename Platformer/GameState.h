@@ -61,6 +61,7 @@ namespace Engine2D
 	public:
 
 		MenuInput(int x, int y, int w, int h);
+		virtual ~MenuInput() = default;
 
 		virtual void Update(float deltaTime) = 0;
 		virtual void Render(float deltaTime) = 0;

@@ -57,10 +57,10 @@ namespace Platformer
 			Bonus* bonus = new Bonus();
 			bonus->Initialize(0, NULL);
 
-			char* files[1];
+			const char* files[1];
 			files[0] = "./Assets/Images/BigFrame.png";
 
-			bonus->LoadContent(1, files);
+			bonus->LoadContent(1, const_cast<char**>(files));
 			bonus->SetRunning(true);
 
 			engine.RegisterState(bonus);
@@ -102,7 +102,7 @@ namespace Platformer
 
 			UI::AccessUI()->PlayConfirmEffect();
 
-			char* files[4];
+			const char* files[4];
 			files[0] = "./Assets/Images/Pieces/Base";
 			files[1] = "./Saves/Customization.plCTM";
 			files[2] = "./Assets/Data/Spritesheet/Player.plSPS";
@@ -110,7 +110,7 @@ namespace Platformer
 
 			Customizer* cust = new Customizer();
 			cust->Initialize(0, NULL);
-			cust->LoadContent(4, files);
+			cust->LoadContent(sizeof(files), const_cast<char**>(files));
 			cust->SetRunning(true);
 
 			engine.RegisterState(cust);

@@ -22,15 +22,15 @@ namespace Platformer
 	struct LevelData
 	{
 
-		int numDamsels;
-		int numDossiers;
+		int numDamsels = 0;
+		int numDossiers = 0;
 
-		int reputationForCompletion;
+		int reputationForCompletion = 0;
 
 		std::string name;
 		std::string shorthand;
 		std::string startLevel;
-		int startSpawn;
+		int startSpawn = 0;
 
 	};
 
@@ -144,8 +144,8 @@ namespace Platformer
 
 		std::string name;
 
-		int hairIndex;
-		int costumeIndex;
+		int hairIndex = 0;
+		int costumeIndex = 0;
 		SDL_Color hairColor;
 
 		std::map<std::string, int> infoCounts;

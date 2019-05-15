@@ -5,8 +5,8 @@ AR=$(CROSS)ar
 PKG_CONFIG=$(CROSS)pkg-config
 
 
-BASE_LIBS=$(shell $(CROSS)sdl2-config --libs) -lSDL2_ttf $(shell $(CROSS)pkg-config SDL2_image SDL2_mixer --libs) $(SAGO_BASE_LIBS)
-BASE_CFLAGS=-c -g -O0 -Wall -std=c++17 $(shell $(CROSS)sdl2-config --cflags)
+BASE_LIBS=$(shell $(CROSS)sdl2-config --libs) -lstdc++fs -lSDL2_ttf $(shell $(CROSS)pkg-config SDL2_image SDL2_mixer --libs) $(SAGO_BASE_LIBS)
+BASE_CFLAGS=-c -g -O0 -Wall -Wno-sign-compare -Wsuggest-override -std=c++17 $(shell $(CROSS)sdl2-config --cflags)
 
 PROGRAMNAME=SuperspySimulator
 
