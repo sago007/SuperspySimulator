@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 2.8.9)
 project (SuperspySimulator)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${SuperspySimulator_SOURCE_DIR}/Extra/cmake")
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -Wno-suggest-override  -Wno-sign-compare -std=c++17 -g")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -Wno-sign-compare -Wsuggest-override -Wno-unused-parameter -std=c++17 -g")
 
 #Setup SDL2
 find_package(SDL2 REQUIRED)
@@ -19,5 +19,5 @@ file(GLOB SOURCES "Platformer/*.cpp")
 
 
 add_executable(SuperspySimulator ${SOURCES})
-target_link_libraries( SuperspySimulator ${SDL2_LIBRARY} stdc++fs)
+target_link_libraries( SuperspySimulator ${SDL2_LIBRARY} stdc++fs m)
 target_link_libraries( SuperspySimulator ${SDL2MIXER_LIBRARIES} ${SDL2IMAGE_LIBRARIES} ${SDL2TTF_LIBRARIES} ${SDL2GFX_LIBRARIES})

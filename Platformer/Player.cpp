@@ -542,7 +542,7 @@ namespace Platformer
 
 			SDL_RenderCopy(renderer, this->koSheet.Surface(), NULL, &rect);
 
-			SDL_Surface* surface = SDL_CreateRGBSurfaceWithFormat(NULL, rect.w, rect.h, 32, format);
+			SDL_Surface* surface = SDL_CreateRGBSurfaceWithFormat(0, rect.w, rect.h, 32, format);
 			SDL_RenderReadPixels(renderer, NULL, surface->format->format, surface->pixels, surface->pitch);
 
 			std::string fileName = "./Assets/Images/Damsels/Damsel" + SaveData::AccessSaveData()->Name() + ".png";

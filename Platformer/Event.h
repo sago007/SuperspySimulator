@@ -63,9 +63,9 @@ namespace Platformer
 		AndTrigger(TriggerCondition* p, TriggerCondition* q);
 		~AndTrigger();
 
-		bool Condition(Player* player);
+		bool Condition(Player* player) override;
 
-		void Render(UI* ui, float transparency, float deltaTime);
+		void Render(UI* ui, float transparency, float deltaTime) override;
 
 	protected:
 
@@ -90,9 +90,9 @@ namespace Platformer
 		SingleTrigger();
 		~SingleTrigger();
 
-		bool Condition(Player* player);
+		bool Condition(Player* player) override;
 
-		void Render(UI* ui, float transparency, float deltaTime);
+		void Render(UI* ui, float transparency, float deltaTime) override;
 
 	protected:
 
@@ -116,9 +116,9 @@ namespace Platformer
 		ItemTrigger(std::string i, int c);
 		~ItemTrigger();
 
-		bool Condition(Player* player);
+		bool Condition(Player* player) override;
 
-		void Render(UI* ui, float transparency, float deltaTime);
+		void Render(UI* ui, float transparency, float deltaTime) override;
 
 	protected:
 
@@ -143,9 +143,9 @@ namespace Platformer
 		InputTrigger(std::vector<int> in);
 		~InputTrigger();
 
-		bool Condition(Player* player);
+		bool Condition(Player* player) override;
 
-		void Render(UI* ui, float transparency, float deltaTime);
+		void Render(UI* ui, float transparency, float deltaTime) override;
 
 	protected:
 
@@ -169,9 +169,9 @@ namespace Platformer
 		DefeatTrigger(std::string n, Platformer* p);
 		~DefeatTrigger();
 
-		bool Condition(Player* player);
+		bool Condition(Player* player) override;
 
-		void Render(UI* ui, float transparency, float deltaTime);
+		void Render(UI* ui, float transparency, float deltaTime) override;
 
 	protected:
 
@@ -212,9 +212,9 @@ namespace Platformer
 
 	protected:
 
-		TriggerCondition* condition;
+		TriggerCondition* condition = nullptr;
 
-		float transparency;
+		float transparency = 0.0f;
 
 		bool display = true;
 
@@ -230,7 +230,7 @@ namespace Platformer
 		PlatformTrigger(CollisionMap* col, int i, float x, float y, float w, float h);
 		~PlatformTrigger();
 
-		void Update(Player* player, float deltaTime);
+		void Update(Player* player, float deltaTime) override;
 
 	protected:
 
@@ -240,8 +240,8 @@ namespace Platformer
 
 	protected:
 
-		CollisionMap* collisionMap;
-		int index;
+		CollisionMap* collisionMap = nullptr;
+		int index = 0;
 		
 	};
 
@@ -255,7 +255,7 @@ namespace Platformer
 		DoorTrigger(std::string l, int s, float x, float y, float w, float h);
 		~DoorTrigger();
 
-		void Update(Player* player, float deltaTime);
+		void Update(Player* player, float deltaTime) override;
 
 	protected:
 
@@ -266,7 +266,7 @@ namespace Platformer
 	protected:
 
 		std::string level;
-		int spawnIndex;
+		int spawnIndex = 0;
 
 	};
 
@@ -280,7 +280,7 @@ namespace Platformer
 		ExitTrigger(float x, float y, float w, float h);
 		~ExitTrigger();
 
-		void Update(Player* player, float deltaTime);
+		void Update(Player* player, float deltaTime) override;
 
 	protected:
 
@@ -302,7 +302,7 @@ namespace Platformer
 		SoundTrigger(std::string e, float x, float y, float w, float h);
 		~SoundTrigger();
 
-		void Update(Player* player, float deltaTime);
+		void Update(Player* player, float deltaTime) override;
 
 	protected:
 
@@ -326,7 +326,7 @@ namespace Platformer
 		TutorialTrigger(PauseText t, float x, float y, float w, float h);
 		~TutorialTrigger();
 
-		void Update(Player* player, float deltaTime);
+		void Update(Player* player, float deltaTime) override;
 
 	protected:
 
@@ -350,7 +350,7 @@ namespace Platformer
 		TriggerTrigger(Trigger* t, std::string n, Level* lvl, bool f, int i, int l, float x, float y, float w, float h);
 		~TriggerTrigger();
 
-		void Update(Player* player, float deltaTime);
+		void Update(Player* player, float deltaTime) override;
 
 	protected:
 
@@ -360,12 +360,12 @@ namespace Platformer
 
 	protected:
 
-		Trigger* trigger;
-		Level* level;
+		Trigger* trigger = nullptr;
+		Level* level = nullptr;
 
-		bool foreground;
-		int imageIndex;
-		int locationIndex;
+		bool foreground = false;
+		int imageIndex = 0;
+		int locationIndex = 0;
 
 		std::string name;
 
@@ -382,11 +382,11 @@ namespace Platformer
 		Breakable(Level* l, std::string c, int mH, int d, float x, float y, float w, float h);
 		~Breakable();
 
-		void Die();
+		void Die() override;
 
-		const char* Type();
+		const char* Type() override;
 
-		bool ShouldMove();
+		bool ShouldMove() override;
 
 	protected:
 

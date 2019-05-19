@@ -75,10 +75,10 @@ namespace Platformer
 
 	protected:
 
-		int width;
-		int height;
+		int width = 0;
+		int height = 0;
 
-		int lockX, lockY;
+		int lockX = 0, lockY = 0;
 
 		CollisionMap collision;
 
@@ -90,19 +90,19 @@ namespace Platformer
 
 		std::map<std::string, GameEntity*> breakables;
 
-		Mix_Music* music;
+		Mix_Music* music = nullptr;
 
-		SDL_Texture* tileImage;
+		SDL_Texture* tileImage = nullptr;
 
 		std::vector<Spritesheet*> backgroundSheets;
 		std::vector<std::vector<Vector2>> backgroundLocations;
 		std::vector<Spritesheet*> foregroundSheets;
 		std::vector<std::vector<Vector2>> foregroundLocations;
 
-		Platformer* platformer;
+		Platformer* platformer = nullptr;
 
-		Item* enemyDrop;
-		int dropChance;
+		Item* enemyDrop = nullptr;
+		int dropChance = 0;
 
 		std::vector<std::pair<std::pair<std::string, std::string>, Vector2>> spawnLocations;
 

@@ -465,9 +465,6 @@ namespace Platformer
 
 		SDL_RenderCopy(renderer, this->reputationBackground, NULL, &dest);
 
-		float centerX = dest.x + width/ 2;
-		float centerY = dest.y + height / 2;
-
 		SDL_Rect src;
 
 		float atRisk = ((float)((data->GetAtRiskReputation() + data->GetReputation()) % REPUTATION_LEVEL_SIZE)) / REPUTATION_LEVEL_SIZE;

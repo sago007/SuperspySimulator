@@ -105,7 +105,7 @@ namespace Platformer
 		std::vector<int> tempIndices;
 		float tempTransparency;
 
-		ScriptedAction* action;
+		ScriptedAction* action = nullptr;
 
 		int needed = 0;
 

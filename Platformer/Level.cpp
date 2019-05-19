@@ -1,6 +1,7 @@
 //Includes
 #include <math.h>
 #include <sstream>
+#include <iostream>
 
 //Custom Includes
 #include "Helpers.h"
@@ -161,6 +162,9 @@ namespace Platformer
 		std::string render = RENDER_DIRECTORY;
 
 		std::ifstream file(fileName);
+		if (!file.is_open()) {
+			std::cerr << "Failed to open " << fileName << "\n";
+		}
 		std::string line;
 
 		std::getline(file, line);
@@ -257,6 +261,9 @@ namespace Platformer
 		std::string base = IMAGE_DIRECTORY;
 
 		std::ifstream file(fileName);
+		if (!file.is_open()) {
+			std::cerr << "Failed to open " << fileName << "\n";
+		}
 
 		std::string line;
 		std::getline(file, line);
@@ -379,6 +386,9 @@ namespace Platformer
 	{
 
 		std::ifstream file(fileName);
+		if (!file.is_open()) {
+			std::cerr << "Failed to open " << fileName << "\n";
+		}
 
 		std::string line;
 		std::getline(file, line);
@@ -404,6 +414,9 @@ namespace Platformer
 	{
 
 		std::ifstream file(fileName);
+		if (!file.is_open()) {
+			std::cerr << "Failed to open " << fileName << "\n";
+		}
 
 		std::string line;
 		std::getline(file, line);
@@ -415,6 +428,8 @@ namespace Platformer
 
 		std::string name;
 		std::getline(file, name);
+
+		std::cerr << "LoadEvents. Name: " << name << ", Line: " << line << "\n";
 
 		for (int i = 0; i < numEvents; i++)
 		{
@@ -572,6 +587,7 @@ namespace Platformer
 
 					}
 
+					std::cerr << "trigger: " << name << "\n";
 					this->triggers.push_back(Trigger::TriggerFactory(file, this, name));
 
 					if (!load)
@@ -609,6 +625,7 @@ namespace Platformer
 					std::getline(file, code);
 
 					std::getline(file, line);
+					std::cerr << "Breakable: " << code << ": " << line << "\n";
 
 					if (this->breakables.find(line) == this->breakables.end())
 					{
@@ -616,6 +633,9 @@ namespace Platformer
 						Breakable* breakableMaster = new Breakable(code);
 						breakableMaster->SetLevel(this);
 						auto lineStream = std::ifstream(line);
+						if (!file.is_open()) {
+							std::cerr << "Failed to open " << fileName << "\n";
+						}
 						breakableMaster->LoadEntity(lineStream, true);
 
 						this->breakables[line] = breakableMaster;
@@ -674,6 +694,9 @@ namespace Platformer
 	{
 
 		std::ifstream file(fileName);
+		if (!file.is_open()) {
+			std::cerr << "Failed to open " << fileName << "\n";
+		}
 
 		std::string line;
 		std::getline(file, line);

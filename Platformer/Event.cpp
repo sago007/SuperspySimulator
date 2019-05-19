@@ -1,5 +1,6 @@
 //Includes
 #include <sstream>
+#include <iostream>
 
 //Custom Includes
 #include "Helpers.h"
@@ -158,7 +159,7 @@ namespace Platformer
 
 		if (!this->fired)
 		{
-
+			std::cerr << "Firering trigger\n";
 			this->fired = true;
 
 			return true;
@@ -210,7 +211,7 @@ namespace Platformer
 
 	DefeatTrigger::DefeatTrigger(std::string n, Platformer* p)
 	{
-
+		std::cerr << "DefeatTrigger created " << n << "\n";
 		this->name = n;
 		this->platformer = p;
 
@@ -223,8 +224,9 @@ namespace Platformer
 
 	bool DefeatTrigger::Condition(Player* player)
 	{
-
-		return !this->platformer->SearchType(this->name);
+		bool condition = !this->platformer->SearchType(this->name);
+		std::cout << "Testing trigger " << this->name << " " << condition << "\n";
+		return condition;
 
 	}
 
@@ -624,7 +626,7 @@ namespace Platformer
 
 	TriggerTrigger::TriggerTrigger(Trigger* t, std::string n, Level* lvl, bool f, int i, int l, float x, float y, float w, float h) : Trigger(x, y, w, h)
 	{
-
+		std::cerr << "Creating TriggerTrigger " << name << "\n";
 		this->trigger = t;
 		this->level = lvl;
 
@@ -694,7 +696,7 @@ namespace Platformer
 
 	void Breakable::Die()
 	{
-
+		std::cerr << "Die! " << this->code << "\n";
 		this->level->Collision()->Unregister(this->code);
 		this->GameEntity::Die();
 

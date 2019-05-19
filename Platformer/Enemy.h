@@ -65,16 +65,16 @@ namespace Platformer
 		Emplacement(Level* l, int mH, int d, float x, float y, float w, float h, float fX, float fY);
 		~Emplacement();
 
-		void Update(std::vector<GameEntity*>& entities, std::vector<Attack*>& attacks, float deltaTime);
+		void Update(std::vector<GameEntity*>& entities, std::vector<Attack*>& attacks, float deltaTime) override;
 
-		virtual Enemy* Clone(Vector2 location, std::string type);
+		virtual Enemy* Clone(Vector2 location, std::string type) override;
 
 		void SetWeapon(Weapon* w);
 
 		void SetFiringDirection(float x, float y);
 
-		void Pause();
-		void Unpause();
+		void Pause() override;
+		void Unpause() override;
 
 	protected:
 
@@ -101,9 +101,9 @@ namespace Platformer
 		Patrolman(Level* l, int mH, int d, float x, float y, float w, float h, float mn, float mx, float s);
 		~Patrolman();
 
-		void Update(std::vector<GameEntity*>& entities, std::vector<Attack*>& attacks, float deltaTime);
+		void Update(std::vector<GameEntity*>& entities, std::vector<Attack*>& attacks, float deltaTime) override;
 
-		virtual Enemy* Clone(Vector2 location, std::string type);
+		virtual Enemy* Clone(Vector2 location, std::string type) override;
 
 		void SetVision(AABB v);
 		void SetWeapon(Weapon* w);
@@ -114,8 +114,8 @@ namespace Platformer
 
 		void SetFiringDirection(float x, float y);
 
-		void Pause();
-		void Unpause();
+		void Pause() override;
+		void Unpause() override;
 
 	protected:
 
@@ -145,9 +145,9 @@ namespace Platformer
 		Chaser(Level* l, int mH, int d, float x, float y, float w, float h);
 		~Chaser();
 
-		void Update(std::vector<GameEntity*>& entities, std::vector<Attack*>& attacks, float deltaTime);
+		void Update(std::vector<GameEntity*>& entities, std::vector<Attack*>& attacks, float deltaTime) override;
 
-		virtual Enemy* Clone(Vector2 location, std::string type);
+		virtual Enemy* Clone(Vector2 location, std::string type) override;
 
 		void AddToPath(Vector2 p);
 		void SetRange(AABB r);
@@ -160,8 +160,8 @@ namespace Platformer
 
 		void SetWeapon(Weapon* w);
 
-		void Pause();
-		void Unpause();
+		void Pause() override;
+		void Unpause() override;
 
 	protected:
 
@@ -197,9 +197,9 @@ namespace Platformer
 		Turret(Level* l, int mH, int d, float x, float y, float w, float h);
 		~Turret();
 
-		void Update(std::vector<GameEntity*>& entities, std::vector<Attack*>& attacks, float deltaTime);
+		void Update(std::vector<GameEntity*>& entities, std::vector<Attack*>& attacks, float deltaTime) override;
 
-		virtual Enemy* Clone(Vector2 location, std::string type);
+		virtual Enemy* Clone(Vector2 location, std::string type) override;
 
 		void SetMinAngle(float a);
 		void SetMaxAngle(float a);
@@ -208,8 +208,8 @@ namespace Platformer
 
 		void SetWeapon(Weapon* w);
 
-		void Pause();
-		void Unpause();
+		void Pause() override;
+		void Unpause() override;
 
 	protected:
 
@@ -239,9 +239,9 @@ namespace Platformer
 		Mover(Level* l, int mH, int d, float x, float y, float w, float h);
 		~Mover();
 
-		void Update(std::vector<GameEntity*>& entities, std::vector<Attack*>& attacks, float deltaTime);
+		void Update(std::vector<GameEntity*>& entities, std::vector<Attack*>& attacks, float deltaTime) override;
 
-		virtual Enemy* Clone(Vector2 location, std::string type);
+		virtual Enemy* Clone(Vector2 location, std::string type) override;
 
 		void SetType(std::string t);
 		void PushParameter(float p);
@@ -284,11 +284,11 @@ namespace Platformer
 		FSM(Level* l, int mH, int d, float x, float y, float w, float h);
 		~FSM();
 
-		virtual void Hurt(Attack* a);
+		virtual void Hurt(Attack* a) override;
 
-		void Update(std::vector<GameEntity*>& entities, std::vector<Attack*>& attacks, float deltaTime);
+		void Update(std::vector<GameEntity*>& entities, std::vector<Attack*>& attacks, float deltaTime) override;
 
-		virtual Enemy* Clone(Vector2 location, std::string type);
+		virtual Enemy* Clone(Vector2 location, std::string type) override;
 
 		void AddState(std::string s, int anim, bool loop);
 		void AddNode(DecisionNode node);
@@ -301,8 +301,8 @@ namespace Platformer
 		void SetHurtBox(AABB box);
 		void SetHurtOffset(Vector2 o);
 
-		void Pause();
-		void Unpause();
+		void Pause() override;
+		void Unpause() override;
 
 	protected:
 

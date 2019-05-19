@@ -67,7 +67,7 @@ namespace Platformer
 
 		}
 
-		if (this->inputs["StartButton"]->Value())
+		if (this->inputs["StartButton"] && this->inputs["StartButton"]->Value())
 		{
 
 			if (SaveData::AccessSaveData()->DefeatedLevel().size() == 0)
@@ -97,7 +97,7 @@ namespace Platformer
 
 		}
 
-		if (this->inputs["CustomizeButton"]->Value())
+		if (this->inputs["CustomizeButton"] && this->inputs["CustomizeButton"]->Value())
 		{
 
 			UI::AccessUI()->PlayConfirmEffect();
@@ -110,14 +110,14 @@ namespace Platformer
 
 			Customizer* cust = new Customizer();
 			cust->Initialize(0, NULL);
-			cust->LoadContent(sizeof(files), const_cast<char**>(files));
+			cust->LoadContent(4, const_cast<char**>(files));
 			cust->SetRunning(true);
 
 			engine.RegisterState(cust);
 
 		}
 
-		if (this->inputs["LoadButton"]->Value())
+		if (this->inputs["LoadButton"] && this->inputs["LoadButton"]->Value())
 		{
 
 			UI::AccessUI()->PlayConfirmEffect();
@@ -136,7 +136,7 @@ namespace Platformer
 
 		}
 
-		if (this->inputs["BestiaryButton"]->Value())
+		if (this->inputs["BestiaryButton"] && this->inputs["BestiaryButton"]->Value())
 		{
 
 			UI::AccessUI()->PlayConfirmEffect();
@@ -153,7 +153,7 @@ namespace Platformer
 
 		}
 
-		if (this->inputs["OptionsButton"]->Value())
+		if (this->inputs["OptionsButton"] && this->inputs["OptionsButton"]->Value())
 		{
 
 			UI::AccessUI()->PlayConfirmEffect();
@@ -167,7 +167,7 @@ namespace Platformer
 
 		}
 
-		if (this->inputs["QuitButton"]->Value())
+		if (this->inputs["QuitButton"] && this->inputs["QuitButton"]->Value())
 		{
 
 			UI::AccessUI()->PlayCancelEffect();

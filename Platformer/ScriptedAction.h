@@ -52,11 +52,11 @@ namespace Platformer
 
 	protected:
 
-		double startTime;
-		float duration;
+		double startTime = 0.0;
+		float duration = 0.0f;
 
 		bool paused = false;
-		double pauseTime;
+		double pauseTime = 0.0;
 
 	};
 
@@ -71,9 +71,9 @@ namespace Platformer
 		PlayerHurtAction(int direction, float s, float d);
 		~PlayerHurtAction();
 
-		std::string Type();
+		std::string Type() override;
 
-		void Update(GameEntity* obj, std::vector<Attack*> attacks, UI* ui, float deltaTime);
+		void Update(GameEntity* obj, std::vector<Attack*> attacks, UI* ui, float deltaTime) override;
 
 	protected:
 
@@ -83,8 +83,8 @@ namespace Platformer
 
 	protected:
 
-		int direction;
-		float speed;
+		int direction = 0;
+		float speed = 1.0f;
 
 	};
 
@@ -99,11 +99,11 @@ namespace Platformer
 		FallingKOAction(float d, bool fall);
 		~FallingKOAction();
 
-		std::string Type();
+		std::string Type() override;
 
-		void Update(GameEntity* obj, std::vector<Attack*> attacks, UI* ui, float deltaTime);
+		void Update(GameEntity* obj, std::vector<Attack*> attacks, UI* ui, float deltaTime) override;
 
-		bool Active();
+		bool Active() override;
 
 	public:
 
@@ -131,11 +131,11 @@ namespace Platformer
 		HopAction(Player* p, float d);
 		~HopAction();
 
-		std::string Type();
+		std::string Type() override;
 
-		void Update(GameEntity* obj, std::vector<Attack*> attacks, UI* ui, float deltaTime);
+		void Update(GameEntity* obj, std::vector<Attack*> attacks, UI* ui, float deltaTime) override;
 
-		void HandleAnimation(float deltaTime);
+		void HandleAnimation(float deltaTime) override;
 
 	protected:
 
@@ -147,7 +147,7 @@ namespace Platformer
 
 		bool jumpKeyUp = true;
 
-		Player* parent;
+		Player* parent = nullptr;
 		bool captured = false;
 
 	};
@@ -163,13 +163,13 @@ namespace Platformer
 		EscapeMinigame(int n, Player* p, float d);
 		~EscapeMinigame();
 
-		std::string Type();
+		std::string Type() override;
 
-		void Update(GameEntity* obj, std::vector<Attack*> attacks, UI* ui, float deltaTime);
+		void Update(GameEntity* obj, std::vector<Attack*> attacks, UI* ui, float deltaTime) override;
 
-		void Render();
+		void Render() override;
 
-		bool Active();
+		bool Active() override;
 
 		double EscapeDuration();
 
@@ -186,19 +186,19 @@ namespace Platformer
 	protected:
 
 		static int hard;
-		int difficulty;
+		int difficulty = 0;
 
-		Player* parent;
+		Player* parent = nullptr;
 
 		int button = -1;
 
-		float success;
+		float success = 0.0f;
 
 		double lastButton = 0;
 
-		SDL_Texture* base;
-		SDL_Texture* filler;
-		SDL_Texture* hair;
+		SDL_Texture* base = nullptr;
+		SDL_Texture* filler = nullptr;
+		SDL_Texture* hair = nullptr;
 
 	};
 

@@ -1,6 +1,7 @@
 //Includes
 #include <fstream>
 #include <sstream>
+#include <iostream>
 
 //Custom Includes
 #include "Helpers.h"
@@ -41,6 +42,9 @@ namespace Platformer
 	{
 
 		std::ifstream file(fileName);
+		if (!file.is_open()) {
+			std::cerr << "Failed to open " << fileName << "\n";
+		}
 		std::string line;
 
 		std::getline(file, line);
@@ -405,6 +409,10 @@ namespace Platformer
 
 			this->moving[index]->Trigger();
 
+		}
+		else
+		{
+			std::cerr << "Invalid collision index " << index << "\n";
 		}
 
 	}

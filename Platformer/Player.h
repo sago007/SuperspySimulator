@@ -55,27 +55,27 @@ namespace Platformer
 		Player(Platformer* p, Level* l, int mH, int d, float x, float y, float w, float h);
 		~Player();
 
-		void Update(std::vector<GameEntity*>& entities, std::vector<Attack*>& attacks, float deltaTime);
+		void Update(std::vector<GameEntity*>& entities, std::vector<Attack*>& attacks, float deltaTime) override;
 
 		void CanJump();
 
 		void Shoot(std::vector<Attack*>& attacks);
-		void Die();
+		void Die() override;
 
-		void Pause();
-		void Unpause();
+		void Pause() override;
+		void Unpause() override;
 
-		const char* Type();
+		const char* Type() override;
 
 		bool OneWay();
 
-		void Hurt(Attack* a);
-		bool IsHurt();
+		void Hurt(Attack* a) override;
+		bool IsHurt() override;
 		bool Scripted();
 
 		int Respawn();
 
-		void RequestEvent(std::string e);
+		void RequestEvent(std::string e) override;
 		void AddItem(Item* i);
 		std::vector<Item*> Inventory();
 
@@ -85,9 +85,9 @@ namespace Platformer
 
 	protected:
 
-		void Load(std::ifstream& file);
+		void Load(std::ifstream& file) override;
 
-		bool ShouldMove();
+		bool ShouldMove() override;
 
 	//Data
 

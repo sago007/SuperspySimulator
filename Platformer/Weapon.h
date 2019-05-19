@@ -54,13 +54,13 @@ namespace Platformer
 
 	protected:
 
-		GameEntity* parent;
+		GameEntity* parent = nullptr;
 
-		float rateOfUse;
-		double lastUsed; 
+		float rateOfUse = 0;
+		double lastUsed = 0.0f; 
 
-		double pauseTime;
-		bool paused;
+		double pauseTime = 0.0f;
+		bool paused = false;
 		
 		Mix_Chunk* useEffect = NULL;
 		bool loadedSounds = true;
@@ -78,14 +78,14 @@ namespace Platformer
 		Melee(GameEntity* p, float r, MeleeAttack* m);
 		~Melee();
 
-		Weapon* Clone(GameEntity* p);
+		Weapon* Clone(GameEntity* p) override;
 
-		void Refresh();
+		void Refresh() override;
 
 	protected:
 
-		void Fire(std::vector<Attack*>& attacks, Vector2 direction);
-		void Load(std::ifstream& file);
+		void Fire(std::vector<Attack*>& attacks, Vector2 direction) override;
+		void Load(std::ifstream& file) override;
 
 	//Data
 
@@ -109,14 +109,14 @@ namespace Platformer
 
 		Vector2 Offset();
 
-		Weapon* Clone(GameEntity* p);
+		Weapon* Clone(GameEntity* p) override;
 
-		void Refresh();
+		void Refresh() override;
 
 	protected:
 
-		void Fire(std::vector<Attack*>& attacks, Vector2 direction);
-		void Load(std::ifstream& file);
+		void Fire(std::vector<Attack*>& attacks, Vector2 direction) override;
+		void Load(std::ifstream& file) override;
 
 	//Data
 	
@@ -143,14 +143,14 @@ namespace Platformer
 
 		Vector2 Offset();
 
-		Weapon* Clone(GameEntity* p);
+		Weapon* Clone(GameEntity* p) override;
 
-		void Refresh();
+		void Refresh() override;
 
 	protected:
 
-		void Fire(std::vector<Attack*>& attacks, Vector2 direction);
-		void Load(std::ifstream& file);
+		void Fire(std::vector<Attack*>& attacks, Vector2 direction) override;
+		void Load(std::ifstream& file) override;
 
 	//Data
 

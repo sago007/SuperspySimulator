@@ -275,9 +275,9 @@ namespace Engine2D
 		std::map<std::string, MenuInput*>::iterator it;
 		for (it = this->inputs.begin(); it != this->inputs.end(); it++)
 		{
-
-			it->second->Update(deltaTime);
-
+			if (it->second) {	
+				it->second->Update(deltaTime);
+			}
 		}
 
 	}
@@ -290,9 +290,9 @@ namespace Engine2D
 		std::map<std::string, MenuInput*>::iterator it;
 		for (it = this->inputs.begin(); it != this->inputs.end(); it++)
 		{
-
-			it->second->Render(deltaTime);
-
+			if (it->second) {
+				it->second->Render(deltaTime);
+			}
 		}
 
 		for (int i = 0; i < this->text.size(); i++)

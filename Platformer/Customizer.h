@@ -96,14 +96,14 @@ namespace Platformer
 		void Initialize(int argc, char* argv[]) override;
 		void LoadContent(int argc, char* argv[]) override;
 
-		void Update(float deltaTime);
-		void Render(float deltaTime);
+		void Update(float deltaTime) override;
+		void Render(float deltaTime) override;
 
-		void Pause();
-		void Unpause();
-		bool UnpauseCondition();
+		void Pause() override;
+		void Unpause() override;
+		bool UnpauseCondition() override;
 
-		void Shutdown();
+		void Shutdown() override;
 
 	protected:
 

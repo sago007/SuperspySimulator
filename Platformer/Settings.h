@@ -109,10 +109,10 @@ namespace Platformer
 
 		ControlPreference controls;
 
-		bool debug;
+		bool debug = false;
 
-		int soundVolume;
-		int musicVolume;
+		int soundVolume = 0;
+		int musicVolume = 0;
 
 		bool hardMode = false;
 

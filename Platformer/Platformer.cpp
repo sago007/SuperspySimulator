@@ -1,6 +1,7 @@
 //Includes
 #include <sstream>
 #include <algorithm>
+#include <iostream>
 
 //Custom Includes
 #include "Helpers.h"
@@ -90,6 +91,9 @@ namespace Platformer
 			this->LoadLevel(argv[0], spawn);
 
 			auto arg2stream = std::ifstream(argv[2]);
+			if (!arg2stream.is_open()) {
+				std::cerr << "Failed to open " << argv[2] << "\n";
+			}
 			this->player->LoadEntity(arg2stream, true);
 
 			this->player->Move(this->level->SpawnIndex(spawn));
@@ -501,11 +505,11 @@ namespace Platformer
 			if (!this->pauseText)
 			{
 
-				UI::AccessUI()->RenderText(Vector2(PLATFORMER_TARGET_WIDTH / 2.0, PLATFORMER_TARGET_HEIGHT / 2.0), "Paused", { 255, 255, 255 });
+				UI::AccessUI()->RenderText(Vector2(PLATFORMER_TARGET_WIDTH / 2.0, PLATFORMER_TARGET_HEIGHT / 2.0), "Paused", { 255, 255, 255, 0 });
 
-				UI::AccessUI()->RenderText(Vector2((PLATFORMER_TARGET_WIDTH / 2.0) + 16, (PLATFORMER_TARGET_HEIGHT / 2.0) + 64), "Resume", { 224, 224, 224 }, false);
-				UI::AccessUI()->RenderText(Vector2((PLATFORMER_TARGET_WIDTH / 2.0) + 16, (PLATFORMER_TARGET_HEIGHT / 2.0) + 96), "Title Screen", { 224, 224, 224 }, false);
-				UI::AccessUI()->RenderText(Vector2((PLATFORMER_TARGET_WIDTH / 2.0) + 16, (PLATFORMER_TARGET_HEIGHT / 2.0) + 128), "Quit", { 224, 224, 224 }, false);
+				UI::AccessUI()->RenderText(Vector2((PLATFORMER_TARGET_WIDTH / 2.0) + 16, (PLATFORMER_TARGET_HEIGHT / 2.0) + 64), "Resume", { 224, 224, 224, 0 }, false);
+				UI::AccessUI()->RenderText(Vector2((PLATFORMER_TARGET_WIDTH / 2.0) + 16, (PLATFORMER_TARGET_HEIGHT / 2.0) + 96), "Title Screen", { 224, 224, 224, 0 }, false);
+				UI::AccessUI()->RenderText(Vector2((PLATFORMER_TARGET_WIDTH / 2.0) + 16, (PLATFORMER_TARGET_HEIGHT / 2.0) + 128), "Quit", { 224, 224, 224, 0 }, false);
 
 				dest.w = dest.h = 32;
 				dest.x = (PLATFORMER_TARGET_WIDTH / 2.0) - 64;

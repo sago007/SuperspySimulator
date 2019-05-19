@@ -98,7 +98,7 @@ namespace Platformer
 
 		virtual void Render(Vector2 world, float deltaTime);
 
-		virtual void Unpause();
+		virtual void Unpause() override;
 
 		virtual const char* Type();
 

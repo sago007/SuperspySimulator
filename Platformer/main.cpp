@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <string>
 #include <fstream>
+#include <iostream>
 #include <sstream>
 #include <math.h>
 #include <time.h>
@@ -91,6 +92,9 @@ int main(int argc, char * argv[])
 					LoadUI();
 
 					std::ifstream lastSave("./Saves/LastSave.txt");
+					if (!lastSave.is_open()) {
+						std::cerr << "Failed to open " << "./Saves/LastSave.txt" << "\n";
+					}
 					std::string name;
 					std::getline(lastSave, name);
 					lastSave.close();

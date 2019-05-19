@@ -48,7 +48,7 @@ namespace Platformer
 
 	protected:
 
-		SDL_Texture* thumbnail;
+		SDL_Texture* thumbnail = nullptr;
 		
 		Spritesheet sheet;
 
@@ -56,7 +56,7 @@ namespace Platformer
 		AABB box;
 
 		std::string name;
-		bool block;
+		bool block = false;
 
 		bool createdThumbnail = true;
 

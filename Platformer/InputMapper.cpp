@@ -80,7 +80,6 @@ namespace Platformer
 
 		this->MenuState::Render(deltaTime);
 
-		ControlPreference* controls = Settings::AccessSettings()->Controls();
 		for (int i = 0; i < NUM_INPUTS; i++)
 		{
 

@@ -93,9 +93,6 @@ namespace Engine2D
 
 		while (!this->quit)
 		{
-
-			double start = GetTime();
-
 			while (SDL_PollEvent(&e) != 0)
 			{
 

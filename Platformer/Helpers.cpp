@@ -1,5 +1,6 @@
 //Includes
 #include <SDL_image.h>
+#include <iostream>
 
 //Custom Includes
 #include "Helpers.h"
@@ -204,9 +205,8 @@ namespace Engine2D
 			SDL_Texture* finalSurface = NULL;
 			if (loadedSurface == NULL)
 			{
-
+				std::cerr << "Failed to load " << fileName << "\n";
 				return NULL;
-
 			}
 			else
 			{
@@ -325,7 +325,7 @@ namespace Engine2D
 		if (previousKeyStates)
 		{
 
-			delete previousKeyStates;
+			delete[] previousKeyStates;
 			previousKeyStates = NULL;
 
 		}

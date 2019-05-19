@@ -19,7 +19,7 @@ namespace Engine2D
 
 		AABB();
 		AABB(int x, int y, int w, int h);
-		~AABB();
+		virtual ~AABB();
 
 		bool Intersects(AABB* box);
 		Vector2 Collides(AABB* box, Vector2 velocity, Vector2 thisVelocity = Vector2(0, 0));

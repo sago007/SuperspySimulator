@@ -47,8 +47,8 @@ namespace Platformer
 
 		bool active = true;
 
-		bool paused;
-		double pauseTime;
+		bool paused = false;
+		double pauseTime = 0.0;
 
 	};
 
@@ -62,14 +62,14 @@ namespace Platformer
 		AndCondition(Condition* p, Condition* q);
 		~AndCondition();
 
-		bool Pass(std::vector<GameEntity*>& entities, std::vector<Attack*>& attacks, float deltaTime);
+		bool Pass(std::vector<GameEntity*>& entities, std::vector<Attack*>& attacks, float deltaTime) override;
 
-		void Spawn();
+		void Spawn() override;
 
-		void Pause();
-		void Unpause();
+		void Pause() override;
+		void Unpause() override;
 
-		bool Active();
+		bool Active() override;
 
 	protected:
 
@@ -79,8 +79,8 @@ namespace Platformer
 
 	protected:
 
-		Condition* p;
-		Condition* q;
+		Condition* p = nullptr;
+		Condition* q = nullptr;
 
 	};
 
@@ -94,9 +94,9 @@ namespace Platformer
 		TimeCondition(double t);
 		~TimeCondition();
 
-		bool Pass(std::vector<GameEntity*>& entities, std::vector<Attack*>& attacks, float deltaTime);
+		bool Pass(std::vector<GameEntity*>& entities, std::vector<Attack*>& attacks, float deltaTime) override;
 
-		void Unpause();
+		void Unpause() override;
 
 	protected:
 
@@ -106,8 +106,8 @@ namespace Platformer
 
 	protected:
 
-		double time;
-		double lastSpawn;
+		double time = 0.0;
+		double lastSpawn = 0.0;
 
 	};
 
@@ -121,7 +121,7 @@ namespace Platformer
 		CountCondition(int m, std::string id);
 		~CountCondition();
 
-		bool Pass(std::vector<GameEntity*>& entities, std::vector<Attack*>& attacks, float deltaTime);
+		bool Pass(std::vector<GameEntity*>& entities, std::vector<Attack*>& attacks, float deltaTime) override;
 
 	protected:
 
@@ -133,7 +133,7 @@ namespace Platformer
 
 		std::string id;
 
-		int max;
+		int max = 0;
 
 	};
 
@@ -147,9 +147,9 @@ namespace Platformer
 		GlobalCountCondition(int m);
 		~GlobalCountCondition();
 
-		bool Pass(std::vector<GameEntity*>& entities, std::vector<Attack*>& attacks, float deltaTime);
+		bool Pass(std::vector<GameEntity*>& entities, std::vector<Attack*>& attacks, float deltaTime) override;
 
-		void Spawn();
+		void Spawn() override;
 
 	protected:
 
@@ -159,9 +159,9 @@ namespace Platformer
 
 	protected:
 
-		int max;
+		int max = 0;
 
-		int count;
+		int count = 0;
 
 	};
 
@@ -185,8 +185,8 @@ namespace Platformer
 		void SetId(std::string id);
 		void SetCondition(Condition* condition);
 
-		void Pause();
-		void Unpause();
+		void Pause() override;
+		void Unpause() override;
 
 		static Spawner* SpawnerFactory(std::ifstream* file);
 
@@ -198,14 +198,14 @@ namespace Platformer
 
 	protected:
 
-		double lastSpawn;
+		double lastSpawn = 0.0;
 
 		std::vector<std::string> codes;
 		std::string id;
 
-		int currentIndex;
+		int currentIndex = 0;
 
-		Condition* condition;
+		Condition* condition = nullptr;
 
 	};
 

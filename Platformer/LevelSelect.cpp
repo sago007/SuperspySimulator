@@ -1,6 +1,7 @@
 //Includes
 #include <SDL_image.h>
 #include <sstream>
+#include <iostream>
 
 //Custom Includes
 #include "Helpers.h"
@@ -29,6 +30,9 @@ namespace Platformer
 		{
 
 			std::ifstream file(argv[0]);
+			if (!file.is_open()) {
+				std::cerr << "Failed to open " << argv[0] << "\n";
+			}
 
 			std::string line;
 			std::getline(file, line);
@@ -382,7 +386,7 @@ namespace Platformer
 		SDL_RenderCopy(renderer, weapon, NULL, &rect);
 		SDL_RenderCopy(renderer, bonds, NULL, &rect);
 
-		SDL_Surface* surface = SDL_CreateRGBSurfaceWithFormat(NULL, rect.w, rect.h, 32, format);
+		SDL_Surface* surface = SDL_CreateRGBSurfaceWithFormat(0, rect.w, rect.h, 32, format);
 		SDL_RenderReadPixels(renderer, NULL, surface->format->format, surface->pixels, surface->pitch);
 
 		IMG_SavePNG(surface, "./Assets/Images/Heroine.png");
@@ -416,7 +420,7 @@ namespace Platformer
 		SDL_RenderCopy(renderer, base, NULL, &rect);
 		SDL_RenderCopy(renderer, bondsFore, NULL, &rect);
 
-		surface = SDL_CreateRGBSurfaceWithFormat(NULL, rect.w, rect.h, 32, format);
+		surface = SDL_CreateRGBSurfaceWithFormat(0, rect.w, rect.h, 32, format);
 		SDL_RenderReadPixels(renderer, NULL, surface->format->format, surface->pixels, surface->pitch);
 
 		IMG_SavePNG(surface, "./Assets/Images/HeroineKO.png");

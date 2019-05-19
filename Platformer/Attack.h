@@ -108,7 +108,7 @@ namespace Platformer
 		void Remove();
 		virtual bool ShouldRemove(Vector2 world);
 
-		virtual bool Active();
+		virtual bool Active() override;
 
 		Spritesheet* Sheet();
 		void SetParent(GameEntity* p);
@@ -150,12 +150,12 @@ namespace Platformer
 		BodyAttack(GameEntity* p, Level* l, int d, float x, float y, float w, float h);
 		~BodyAttack();
 
-		void Update(std::vector<GameEntity*> entities, float deltaTime);
-		bool RemoveCondition();
+		void Update(std::vector<GameEntity*> entities, float deltaTime) override;
+		bool RemoveCondition() override;
 
-		bool Active();
+		bool Active() override;
 
-		std::string Type();
+		std::string Type() override;
 
 	protected:
 
@@ -201,8 +201,8 @@ namespace Platformer
 		Vector2 lOffset;
 		Vector2 rOffset;
 
-		int animIndex;
-		int damage;
+		int animIndex = 0;
+		int damage = 0;
 
 	};
 
@@ -217,18 +217,18 @@ namespace Platformer
 		Bullet(GameEntity* p, Level* l, int hit, int d, float x, float y, float w, float h);
 		~Bullet();
 
-		void Update(std::vector<GameEntity*> entities, float deltaTime);
-		bool RemoveCondition();
-		bool ShouldRemove(Vector2 world);
+		void Update(std::vector<GameEntity*> entities, float deltaTime) override;
+		bool RemoveCondition() override;
+		bool ShouldRemove(Vector2 world) override;
 
-		void Render(Vector2 world, float deltaTime);
+		void Render(Vector2 world, float deltaTime) override;
 
-		std::string Type();
+		std::string Type() override;
 		void SetType(std::string t);
 
 		Bullet* Clone(Vector2 pos, int direction);
 
-		bool Active();
+		bool Active() override;
 
 	protected:
 
@@ -238,11 +238,11 @@ namespace Platformer
 
 	protected:
 
-		int hits;
+		int hits = 0;
 
 		std::string type;
 
-		float offset;
+		float offset = 0.0f;
 
 	};
 

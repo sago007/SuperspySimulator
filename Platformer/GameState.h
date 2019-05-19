@@ -49,7 +49,7 @@ namespace Engine2D
 
 	protected:
 
-		bool running;
+		bool running = false;
 
 	};
 
@@ -91,8 +91,8 @@ namespace Engine2D
 
 		void CreateFromText(TTF_Font* font, std::string text, SDL_Color color);
 
-		void Update(float deltaTime);
-		void Render(float deltaTime);
+		void Update(float deltaTime) override;
+		void Render(float deltaTime) override;
 
 		int Value();
 		void SetSurface(SDL_Texture* s);
@@ -107,8 +107,8 @@ namespace Engine2D
 
 	protected:
 
-		SDL_Texture* surface;
-		SDL_Rect src;
+		SDL_Texture* surface = nullptr;
+		SDL_Rect src = {};
 
 		bool pressed = false;
 		bool created = false;
@@ -124,8 +124,8 @@ namespace Engine2D
 
 		Slider(int x, int y, int w, int h);
 
-		void Update(float deltaTime);
-		void Render(float deltaTime);
+		void Update(float deltaTime) override;
+		void Render(float deltaTime) override;
 
 		int Value();
 		void SetValue(int v);
@@ -140,7 +140,7 @@ namespace Engine2D
 
 	protected:
 
-		int val;
+		int val = 0;
 
 		SDL_Texture* backgroundSurface;
 		SDL_Texture* surface;
@@ -152,7 +152,7 @@ namespace Engine2D
 
 		std::string text;
 		Vector2 pos;
-		SDL_Color color;
+		SDL_Color color = {};
 
 	};
 
@@ -190,16 +190,16 @@ namespace Engine2D
 
 	protected:
 
-		SDL_Color background;
+		SDL_Color background = {};
 
 		std::map<std::string, MenuInput*> inputs;
 
 		std::vector<SDL_Texture*> textures;
 
-		TTF_Font* font;
+		TTF_Font* font = nullptr;
 		std::vector<MenuText> text;
 
-		Mix_Music* bgm;
+		Mix_Music* bgm = nullptr;
 
 	};
 
@@ -209,11 +209,11 @@ namespace Engine2D
 		Vector2 location;
 		Vector2 dimensions;
 
-		SDL_Color color;
-		int index;
+		SDL_Color color = {};
+		int index = 0;
 
-		bool flip;
-		bool sheet;
+		bool flip = false;
+		bool sheet = false;
 
 	};
 
@@ -236,17 +236,17 @@ namespace Engine2D
 		SplashPage(GameState* n);
 		virtual ~SplashPage();
 
-		virtual void Initialize(int argc, char* argv[]);
-		virtual void LoadContent(int argc, char* argv[]);
+		virtual void Initialize(int argc, char* argv[]) override;
+		virtual void LoadContent(int argc, char* argv[]) override;
 
-		virtual void Update(float deltaTime);
-		virtual void Render(float deltaTime);
+		virtual void Update(float deltaTime) override;
+		virtual void Render(float deltaTime) override;
 
-		virtual void Pause();
-		virtual void Unpause();
-		virtual bool UnpauseCondition();
+		virtual void Pause() override;
+		virtual void Unpause() override;
+		virtual bool UnpauseCondition() override;
 
-		virtual void Shutdown();
+		virtual void Shutdown() override;
 
 	protected:
 

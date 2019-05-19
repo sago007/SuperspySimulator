@@ -88,11 +88,11 @@ namespace Platformer
 
 		Vector2 world;
 
-		Player* player;
+		Player* player = nullptr;
 		
-		Level* level;
+		Level* level = nullptr;
 		std::string currentLevel;
-		int spawn;
+		int spawn = 0;
 
 		std::vector<GameEntity*> entities;
 		std::vector<Attack*> attacks;
@@ -101,9 +101,9 @@ namespace Platformer
 
 		bool pauseKeyUp = false;
 
-		int framesInWall;
+		int framesInWall = 0;
 
-		PauseText* pauseText;
+		PauseText* pauseText = nullptr;
 
 	};
 	

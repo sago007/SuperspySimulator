@@ -43,7 +43,7 @@ namespace Platformer
 
 		float speed = 0;
 
-		int renderIndex;
+		int renderIndex = 0;
 
 	};
 
@@ -91,12 +91,12 @@ namespace Platformer
 		Elevator(int i, float x, float y, float w, float h, float s, float maX, float maY, float miX, float miY, int d);
 		~Elevator();
 
-		Vector2 Update(float deltaTime);
-		bool Condition(GameObject* obj, Vector2 velocity, float deltaTime);
+		Vector2 Update(float deltaTime) override;
+		bool Condition(GameObject* obj, Vector2 velocity, float deltaTime) override;
 
 		void SetSpeed(float s);
 
-		void Trigger();
+		void Trigger() override;
 
 	protected:
 
@@ -106,7 +106,7 @@ namespace Platformer
 
 	protected:
 
-		bool moving;
+		bool moving = false;
 
 		Vector2 max;
 		Vector2 min;
@@ -142,7 +142,7 @@ namespace Platformer
 		ConstantPlatform base;
 
 		Vector2 start;
-		float revPerSecond;
+		float revPerSecond = 0;
 		float angle = 0;
 
 	};

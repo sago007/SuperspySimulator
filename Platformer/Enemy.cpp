@@ -1,6 +1,7 @@
 //Includes
 #include <sstream>
 #include <math.h>
+#include <iostream>
 
 //Custom Includes
 #include "Helpers.h"
@@ -83,7 +84,7 @@ namespace Platformer
 
 	void Enemy::Die()
 	{
-
+		std::cerr << "Die\n";
 		this->active = false;
 
 		this->level->EnemyDied(this->Center());
@@ -1722,7 +1723,7 @@ namespace Platformer
 		else
 		{
 
-			float data, value;
+			float data = 0.0f, value;
 			std::string comparator;
 
 			parse >> comparator;

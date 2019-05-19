@@ -153,7 +153,6 @@ namespace Platformer
 		for (int i = 0; i < entities.size(); i++)
 		{
 
-			bool x = this->Active();
 			if (this->Active() && entities[i]->Active() && (!this->parent || this->parent->Type()[0] != entities[i]->Type()[0]) && this->Intersects(entities[i]) && GetTime() - entities[i]->LastHit() > entities[i]->HitInvulnerability())
 			{
 
