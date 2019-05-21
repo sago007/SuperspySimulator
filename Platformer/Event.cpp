@@ -132,8 +132,15 @@ namespace Platformer
 
 	bool AndTrigger::Condition(Player* player)
 	{
-
-		return this->p->Condition(player) && this->q->Condition(player);
+		bool ret = this->p->Condition(player) && this->q->Condition(player);
+		if (!ret) {
+			SingleTrigger* st = dynamic_cast<SingleTrigger*>(this->p);
+			DefeatTrigger* df = dynamic_cast<DefeatTrigger*>(this->q);
+			if (st && df) {
+				st->fired = false;
+			}
+		}
+		return ret;
 
 	}
 
@@ -159,7 +166,7 @@ namespace Platformer
 
 		if (!this->fired)
 		{
-			std::cerr << "Firering trigger\n";
+			std::cerr << "Fired single trigger\n";
 			this->fired = true;
 
 			return true;
@@ -496,7 +503,7 @@ namespace Platformer
 
 	PlatformTrigger::~PlatformTrigger()
 	{
-		
+		std::cerr << "Removed PlatformTrigger\n";
 	}
 
 	void PlatformTrigger::Update(Player* player, float deltaTime)

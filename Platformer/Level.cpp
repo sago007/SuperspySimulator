@@ -1108,14 +1108,16 @@ namespace Platformer
 
 			if (fore)
 			{
-
-				this->foregroundLocations[image].erase(this->foregroundLocations[image].begin() + location);
+				if (this->foregroundLocations.size() > image && this->foregroundLocations[image].size() > location) {
+					this->foregroundLocations[image].erase(this->foregroundLocations[image].begin() + location);
+				}
 
 			}
 			else
 			{
-
-				this->backgroundLocations[image].erase(this->backgroundLocations[image].begin() + location);
+				if (this->backgroundLocations.size() > image && this->backgroundLocations[image].size() > location) {
+					this->backgroundLocations[image].erase(this->backgroundLocations[image].begin() + location);
+				}
 
 			}
 

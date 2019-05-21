@@ -100,8 +100,6 @@ namespace Platformer
 
 	public:
 
-	protected:
-
 		bool fired = false;
 
 	};
