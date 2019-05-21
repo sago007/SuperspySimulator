@@ -94,7 +94,7 @@ namespace Engine2D
 		void Update(float deltaTime) override;
 		void Render(float deltaTime) override;
 
-		int Value();
+		int Value() override;
 		void SetSurface(SDL_Texture* s);
 
 		SDL_Rect* Source();
@@ -127,8 +127,8 @@ namespace Engine2D
 		void Update(float deltaTime) override;
 		void Render(float deltaTime) override;
 
-		int Value();
-		void SetValue(int v);
+		int Value() override;
+		void SetValue(int v) override;
 
 		void SetSurfaces(SDL_Texture* b, SDL_Texture* s);
 
@@ -166,19 +166,19 @@ namespace Engine2D
 		MenuState();
 		virtual ~MenuState();
 
-		virtual void Initialize(int argc, char* argv[]) = 0;
-		virtual void LoadContent(int argc, char* argv[]) = 0;
+		virtual void Initialize(int argc, char* argv[]) override = 0;
+		virtual void LoadContent(int argc, char* argv[]) override = 0;
 
-		virtual void Start();
+		virtual void Start() override;
 
-		virtual void Update(float deltaTime);
-		virtual void Render(float deltaTime);
+		virtual void Update(float deltaTime) override;
+		virtual void Render(float deltaTime) override;
 
-		virtual void Pause();
-		virtual void Unpause();
-		virtual bool UnpauseCondition();
+		virtual void Pause() override;
+		virtual void Unpause() override;
+		virtual bool UnpauseCondition() override;
 
-		virtual void Shutdown();
+		virtual void Shutdown() override;
 
 	protected:
 

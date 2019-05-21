@@ -18,6 +18,10 @@ using namespace Engine2D;
 #define BODY_ATTACK_CODE "BA"
 #define BODY_ATTACK_CODE_LENGTH 2
 
+#ifndef M_PI
+#define M_PI (3.14159265358979323846)
+#endif
+
 namespace Platformer
 {
 
@@ -63,8 +67,8 @@ namespace Platformer
 		Vector2 velocity;
 		Vector2 rawVelocity;
 
-		bool paused;
-		double pauseTime;
+		bool paused = false;
+		double pauseTime = 0.0;
 
 	};
 
@@ -85,7 +89,7 @@ namespace Platformer
 		virtual void Update(std::vector<GameEntity*>& entities, std::vector<Attack*>& attacks, float deltaTime);
 		virtual void Die();
 
-		bool Active();
+		bool Active() override;
 		void SetActive(bool a);
 
 		double LastHit();

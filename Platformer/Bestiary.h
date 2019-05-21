@@ -50,17 +50,17 @@ namespace Platformer
 		Bestiary();
 		~Bestiary();
 
-		void Initialize(int argc, char* argv[]);
-		void LoadContent(int argc, char* argv[]);
+		void Initialize(int argc, char* argv[]) override;
+		void LoadContent(int argc, char* argv[]) override;
 
-		void Update(float deltaTime);
-		void Render(float deltaTime);
+		void Update(float deltaTime) override;
+		void Render(float deltaTime) override;
 
-		void Pause();
-		void Unpause();
-		bool UnpauseCondition();
+		void Pause() override;
+		void Unpause() override;
+		bool UnpauseCondition() override;
 
-		void Shutdown();
+		void Shutdown() override;
 
 	protected:
 
@@ -74,12 +74,12 @@ namespace Platformer
 
 		std::vector<Entry*> entries;
 
-		SDL_Color textColor;
-		int currentEntry;
+		SDL_Color textColor = {};
+		int currentEntry = 0;
 
 		double lastSwitch = 0;
 
-		SDL_Texture* lock;
+		SDL_Texture* lock = nullptr;
 
 	};
 

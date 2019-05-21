@@ -177,14 +177,14 @@ namespace Platformer
 
 		Vector2 Offset();
 
-		Weapon* Clone(GameEntity* p);
+		Weapon* Clone(GameEntity* p) override;
 
-		void Refresh();
+		void Refresh() override;
 
 	protected:
 
-		void Fire(std::vector<Attack*>& attacks, Vector2 direction);
-		void Load(std::ifstream& file);
+		void Fire(std::vector<Attack*>& attacks, Vector2 direction) override;
+		void Load(std::ifstream& file) override;
 
 	//Data
 

@@ -78,11 +78,11 @@ namespace Platformer
 				LevelSelect* levelSelect = new LevelSelect();
 				levelSelect->Initialize(0, NULL);
 
-				char* files[2];
+				const char* files[2];
 				files[0] = "./Saves/Levels.plLVS";
 				files[1] = "./Assets/Images/LevelFrame.png";
 
-				levelSelect->LoadContent(2, files);
+				levelSelect->LoadContent(2, const_cast<char**>(files) );
 				levelSelect->SetRunning(true);
 
 				engine.RegisterState(levelSelect);
@@ -122,14 +122,14 @@ namespace Platformer
 
 			UI::AccessUI()->PlayConfirmEffect();
 
-			char* files[3];
+			const char* files[3];
 			files[0] = "./Assets/Images/Pieces/Base";
 			files[1] = "./Saves/Customization.plCTM";
 			files[2] = "./Assets/Data/Spritesheet/Player.plSPS";
 
 			CharacterSelect* charSelect = new CharacterSelect();
 			charSelect->Initialize(0, NULL);
-			charSelect->LoadContent(3, files);
+			charSelect->LoadContent(3, const_cast<char**>(files) );
 			charSelect->SetRunning(true);
 
 			engine.RegisterState(charSelect);
@@ -141,12 +141,12 @@ namespace Platformer
 
 			UI::AccessUI()->PlayConfirmEffect();
 
-			char* files[1];
+			const char* files[1];
 			files[0] = "./Saves/Bestiary.plBST";
 
 			Bestiary* best = new Bestiary();
 			best->Initialize(0, NULL);
-			best->LoadContent(1, files);
+			best->LoadContent(1, const_cast<char**>(files) );
 			best->SetRunning(true);
 
 			engine.RegisterState(best);

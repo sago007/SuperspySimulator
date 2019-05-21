@@ -13,11 +13,10 @@ find_package(PkgConfig REQUIRED)
 pkg_search_module(SDL2MIXER REQUIRED SDL2_mixer)
 pkg_search_module(SDL2IMAGE REQUIRED SDL2_image)
 pkg_search_module(SDL2TTF REQUIRED SDL2_ttf)
-pkg_search_module(SDL2GFX REQUIRED SDL2_gfx)
 
 file(GLOB SOURCES "Platformer/*.cpp")
 
 
 add_executable(SuperspySimulator ${SOURCES})
 target_link_libraries( SuperspySimulator ${SDL2_LIBRARY} stdc++fs m)
-target_link_libraries( SuperspySimulator ${SDL2MIXER_LIBRARIES} ${SDL2IMAGE_LIBRARIES} ${SDL2TTF_LIBRARIES} ${SDL2GFX_LIBRARIES})
+target_link_libraries( SuperspySimulator ${SDL2MIXER_LIBRARIES} ${SDL2IMAGE_LIBRARIES} ${SDL2TTF_LIBRARIES})

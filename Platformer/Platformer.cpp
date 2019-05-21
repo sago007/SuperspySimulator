@@ -380,10 +380,6 @@ namespace Platformer
 		this->world.SetX(this->player->X() - (PLATFORMER_TARGET_WIDTH / 2));
 		this->world.SetY(this->player->Y() - (PLATFORMER_TARGET_HEIGHT / 2));
 
-		float x = this->world.X();
-		float w = PLATFORMER_TARGET_WIDTH;
-		float w2 = this->level->Width();
-
 		if (this->world.X() < 0)
 		{
 
@@ -535,7 +531,7 @@ namespace Platformer
 				for (int i = 0; i < this->pauseText->text.size(); i++)
 				{
 
-					UI::AccessUI()->RenderText(this->pauseText->text[i].first, this->pauseText->text[i].second, { 255, 255, 255 }, false);
+					UI::AccessUI()->RenderText(this->pauseText->text[i].first, this->pauseText->text[i].second, { 255, 255, 255, 0 }, false);
 
 				}
 
@@ -850,14 +846,14 @@ namespace Platformer
 		SaveData::AccessSaveData()->GameOver();
 		EscapeMinigame::Reset();
 
-		char* files[3];
+		const char* files[3];
 		files[0] = "./Assets/Images/Pieces/Base";
 		files[1] = "./Saves/Customization.plCTM";
 		files[2] = "./Assets/Data/Spritesheet/Player.plSPS";
 
 		CharacterSelect* cust = new CharacterSelect();
 		cust->Initialize(0, NULL);
-		cust->LoadContent(3, files);
+		cust->LoadContent(3, const_cast<char**>(files) );
 		cust->SetRunning(true);
 
 		engine.RegisterState(cust);
@@ -865,9 +861,9 @@ namespace Platformer
 		SplashPage* gameOverSplash = new SplashPage(cust);
 		gameOverSplash->Initialize(0, NULL);
 
-		char* content[1];
+		const char* content[1];
 		content[0] = "./Assets/Data/Menu/GameOver.plSPL";
-		gameOverSplash->LoadContent(1, content);
+		gameOverSplash->LoadContent(1, const_cast<char**>(content) );
 		gameOverSplash->SetRunning(true);
 
 		engine.RegisterState(gameOverSplash);

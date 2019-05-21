@@ -58,8 +58,8 @@ namespace Platformer
 		ConstantPlatform(int i, float x, float y, float w, float h, float s, float maX, float maY, float miX, float miY, int d);
 		~ConstantPlatform();
 
-		Vector2 Update(float deltaTime);
-		bool Condition(GameObject* obj, Vector2 velocity, float deltaTime);
+		Vector2 Update(float deltaTime) override;
+		bool Condition(GameObject* obj, Vector2 velocity, float deltaTime) override;
 
 		void SetSpeed(float s);
 
@@ -128,8 +128,8 @@ namespace Platformer
 		RotatingPlatform(int i, float x, float y, float w, float h, float s, float maX, float maY, float miX, float miY, int d, float startX, float startY, float rPS);
 		~RotatingPlatform();
 
-		Vector2 Update(float deltaTime);
-		bool Condition(GameObject* obj, Vector2 velocity, float deltaTime);
+		Vector2 Update(float deltaTime) override;
+		bool Condition(GameObject* obj, Vector2 velocity, float deltaTime) override;
 
 	protected:
 
@@ -158,8 +158,8 @@ namespace Platformer
 		ConveyorBelt(int i, float x, float y, float w, float h, float s);
 		~ConveyorBelt();
 
-		Vector2 Update(float deltaTime);
-		bool Condition(GameObject* obj, Vector2 velocity, float deltaTime);
+		Vector2 Update(float deltaTime) override;
+		bool Condition(GameObject* obj, Vector2 velocity, float deltaTime) override;
 
 	protected:
 

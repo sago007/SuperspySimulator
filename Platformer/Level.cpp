@@ -429,11 +429,11 @@ namespace Platformer
 		std::string name;
 		std::getline(file, name);
 
-		std::cerr << "LoadEvents. Name: " << name << ", Line: " << line << "\n";
+		std::cerr << "LoadEvents. Name: " << name << ", Line: " << numEvents << "\n";
 
 		for (int i = 0; i < numEvents; i++)
 		{
-
+			std::cerr << " ---- index " << i << "\n";
 			bool load = !this->platformer->Blocked(name);
 
 			bool nameChanged = false;
@@ -597,6 +597,8 @@ namespace Platformer
 						input.clear();
 						input.str(line);
 
+						std::cerr << "line: " << line << "\n";
+						
 						bool fore;
 						int imageIndex, locIndex;
 
@@ -679,7 +681,7 @@ namespace Platformer
 
 				while (std::getline(file, name) && name.substr(0, 2) != "N-")
 				{
-
+					std::cerr << "Dropping " << name << "\n";
 					// Do nothing, this is just to get rid the unloaded event data
 
 				}

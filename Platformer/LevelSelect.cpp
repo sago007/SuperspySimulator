@@ -286,11 +286,11 @@ namespace Platformer
 			spawn << data.startSpawn;
 			std::string st = spawn.str();
 
-			char* files[3];
-			files[0] = (char*)level.c_str();
-			files[1] = (char*)st.c_str();
+			const char* files[3];
+			files[0] = level.c_str();
+			files[1] = st.c_str();
 			files[2] = "./Assets/Data/Master/Player.plETY";
-			platformer->LoadContent(3, files);
+			platformer->LoadContent(3, const_cast<char**>(files) );
 			platformer->SetRunning(true);
 
 			engine.RegisterState(platformer);

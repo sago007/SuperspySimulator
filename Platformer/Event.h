@@ -182,7 +182,7 @@ namespace Platformer
 	protected:
 
 		std::string name;
-		Platformer* platformer;
+		Platformer* platformer = nullptr;
 
 	};
 

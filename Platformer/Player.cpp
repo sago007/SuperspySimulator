@@ -481,7 +481,7 @@ namespace Platformer
 
 		std::string type;
 		parser >> type;
-
+		std::cerr << "Event: " << type << "\n";
 		if (type == "Respawn")
 		{
 

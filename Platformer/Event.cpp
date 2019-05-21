@@ -219,13 +219,13 @@ namespace Platformer
 
 	DefeatTrigger::~DefeatTrigger()
 	{
-
+		std::cerr << "Removed DefeatTrigger " << name << "\n";
 	}
 
 	bool DefeatTrigger::Condition(Player* player)
 	{
 		bool condition = !this->platformer->SearchType(this->name);
-		std::cout << "Testing trigger " << this->name << " " << condition << "\n";
+		std::cerr << "Testing trigger " << this->name << " " << condition << "\n";
 		return condition;
 
 	}
@@ -336,7 +336,7 @@ namespace Platformer
 			input.str(line);
 
 			input >> index;
-
+			std::cerr << "PlatformTrigger line: " << line << "\n";
 			newTrigger = new PlatformTrigger(level->Collision(), index, x, y, w, h);
 
 		}
@@ -488,7 +488,7 @@ namespace Platformer
 
 	PlatformTrigger::PlatformTrigger(CollisionMap* col, int i, float x, float y, float w, float h) : Trigger(x, y, w, h)
 	{
-
+		std::cerr << "Created PlatformTrigger\n";
 		this->collisionMap = col;
 		this->index = i;
 
@@ -515,7 +515,7 @@ namespace Platformer
 
 	DoorTrigger::DoorTrigger(std::string l, int s, float x, float y, float w, float h) : Trigger(x, y, w, h)
 	{
-
+		std::cerr << "Created DoorTrigger - " << l << "\n";
 		this->level = l;
 		this->spawnIndex = s;
 

@@ -491,8 +491,8 @@ namespace Platformer
 
 			Spritesheet* sheet = bullet->Sheet();
 
-			bullet->Sheet()->Clone(&this->sheet);
-			bullet->Sheet()->SetSurface(this->sheet.Surface());
+			sheet->Clone(&this->sheet);
+			sheet->SetSurface(this->sheet.Surface());
 
 			bullet->SetType(this->Type());
 

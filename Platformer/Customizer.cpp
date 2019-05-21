@@ -623,7 +623,7 @@ namespace Platformer
 			rect.y = 0;
 			SDL_QueryTexture(this->playerOutput, &format, NULL, &rect.w, &rect.h);
 
-			surface = SDL_CreateRGBSurfaceWithFormat(NULL, rect.w, rect.h, 32, format);
+			surface = SDL_CreateRGBSurfaceWithFormat(0, rect.w, rect.h, 32, format);
 
 			SDL_RenderReadPixels(renderer, NULL, surface->format->format, surface->pixels, surface->pitch);
 
@@ -637,7 +637,7 @@ namespace Platformer
 
 		SDL_QueryTexture(this->koOutput, &format, NULL, &rect.w, &rect.h);
 
-		surface = SDL_CreateRGBSurfaceWithFormat(NULL, rect.w, rect.h, 32, format);
+		surface = SDL_CreateRGBSurfaceWithFormat(0, rect.w, rect.h, 32, format);
 
 		SDL_RenderReadPixels(renderer, NULL, surface->format->format, surface->pixels, surface->pitch);
 

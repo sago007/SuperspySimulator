@@ -47,8 +47,8 @@ namespace Platformer
 
 		DamageComponent(Attack* a, int d);
 
-		virtual void Hit(GameEntity* entity);
-		virtual int Damage();
+		virtual void Hit(GameEntity* entity) override;
+		virtual int Damage() override;
 
 	protected:
 
@@ -71,7 +71,7 @@ namespace Platformer
 
 		BindingComponent(Attack* a);
 
-		virtual void Hit(GameEntity* entity);
+		virtual void Hit(GameEntity* entity) override;
 
 	protected:
 
@@ -132,7 +132,7 @@ namespace Platformer
 		bool remove = false;
 
 		GameEntity* parent;
-		Level* level;
+		Level* level = nullptr;
 
 		Spritesheet sheet;
 		Vector2 offset;
@@ -178,15 +178,15 @@ namespace Platformer
 		MeleeAttack(GameEntity* p, Level* l, int d, float x, float y, float w, float h, float lOX, float lOY, float rOX, float rOY, int index);
 		~MeleeAttack();
 
-		void Update(std::vector<GameEntity*> entities, float deltaTime);
-		bool RemoveCondition();
-		bool ShouldRemove(Vector2 world);
+		void Update(std::vector<GameEntity*> entities, float deltaTime) override;
+		bool RemoveCondition() override;
+		bool ShouldRemove(Vector2 world) override;
 
-		bool Active();
+		bool Active() override;
 
 		MeleeAttack* Clone(GameEntity* p);
 
-		std::string Type();
+		std::string Type() override;
 
 	protected:
 

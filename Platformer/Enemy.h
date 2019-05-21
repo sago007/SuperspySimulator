@@ -31,14 +31,14 @@ namespace Platformer
 		Enemy(Level* l, int mH, int d, float x, float y, float w, float h);
 		virtual ~Enemy();
 
-		void Die();
+		void Die() override;
 
 		virtual Enemy* Clone(Vector2 location, std::string type) = 0;
 
 		static void Spawn(Vector2 location, std::string type, std::string code, std::map<std::string, Enemy*> master, std::vector<GameEntity*>& entities, std::vector<Attack*>& attacks, float deltaTime);
 		static Enemy* EnemyFactory(std::ifstream* file, std::string code, Level* l);
 
-		const char* Type();
+		const char* Type() override;
 
 	protected:
 
@@ -48,7 +48,7 @@ namespace Platformer
 
 	protected:
 
-		int reputation;
+		int reputation = 0;
 
 		std::string type;
 

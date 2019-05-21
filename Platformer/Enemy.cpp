@@ -10,6 +10,10 @@
 #include "SaveData.h"
 #include "Level.h"
 
+#ifndef M_PI
+#define M_PI (3.14159265358979323846)
+#endif
+
 namespace Platformer
 {
 
@@ -84,7 +88,7 @@ namespace Platformer
 
 	void Enemy::Die()
 	{
-		std::cerr << "Die\n";
+		std::cerr << "Enemy::Die\n";
 		this->active = false;
 
 		this->level->EnemyDied(this->Center());

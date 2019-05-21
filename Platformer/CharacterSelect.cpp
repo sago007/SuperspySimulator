@@ -138,7 +138,7 @@ namespace Platformer
 
 			SaveData::AccessSaveData()->Clear();
 
-			char* files[4];
+			const char* files[4];
 			files[0] = "./Assets/Images/Pieces/Base";
 			files[1] = "./Saves/Customization.plCTM";
 			files[2] = "./Assets/Data/Spritesheet/Player.plSPS";
@@ -146,7 +146,7 @@ namespace Platformer
 
 			Customizer* cust = new Customizer(true);
 			cust->Initialize(0, NULL);
-			cust->LoadContent(4, files);
+			cust->LoadContent(4, const_cast<char**>(files) );
 			cust->SetRunning(true);
 
 			engine.RegisterState(cust);
