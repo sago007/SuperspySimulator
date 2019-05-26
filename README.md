@@ -1,3 +1,24 @@
+# Linux version of SuperspySimulator
+
+I have made some modifications to make SuperspySimulator work on Linux. This included some general fixes and a new CMake build system.
+There is still a nasty bug causing defeat triggers to fire too many times but when I started they did not fire at all.
+
+To compile and run:
+```
+mkdir -p build
+cd build
+cp -r ../Platformer/Assets ./
+cp -r ../Platformer/Saves ./
+cmake ..
+make
+./SuperspySimulator
+```
+Requires a C++17 compiler (tested on g++-8 and clang++-8)
+
+
+## Orginal README
+
+
 Attributions:
 
 Sound effects made using BFXR:
