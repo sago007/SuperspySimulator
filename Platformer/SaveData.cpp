@@ -483,7 +483,6 @@ namespace Platformer
 	void SaveData::ExportCharacter()
 	{
 		std::stringstream file;
-		//std::ofstream file(SAVE_DIRECTORY + this->name + ".plSAV", std::ios::trunc);
 
 		file << this->name << std::endl;
 		file << this->HairIndex() << " " << this->CostumeIndex() << std::endl;
@@ -495,7 +494,6 @@ namespace Platformer
 
 		file << this->defeatedLevel << std::endl;
 
-		//file.close();
 		std::string filename = SAVE_DIRECTORY + this->name + ".plSAV";
 		WriteFileContent(filename.c_str(), file.str());
 
@@ -506,7 +504,6 @@ namespace Platformer
 
 		std::string fileName = SAVE_DIRECTORY;
 		fileName += "Progress.plPRG";
-		//std::ofstream file(fileName);
 		std::stringstream file;
 
 		file << this->GetReputation() << " " << this->GetMaxReputation() << std::endl;
@@ -602,9 +599,7 @@ namespace Platformer
 			delete p->weapon;
 			std::string file_content = GetFileContent(std::string("./Assets/Data/Master/" + this->currentWeapon + ".plWPN").c_str());
 			std::stringstream weapon(file_content);
-			//std::ifstream weapon("./Assets/Data/Master/" + this->currentWeapon + ".plWPN");
 			p->weapon = Weapon::LoadWeapon(weapon, p);
-			//weapon.close();
 
 		}
 
@@ -791,7 +786,6 @@ namespace Platformer
 			if (this->DamselData(name) < numDamsels)
 			{
 
-				//file.close();
 				return false;
 
 			}
@@ -840,7 +834,6 @@ namespace Platformer
 			if (this->DamselData(name) < numDamsels || this->DossierData(name) < numDossiers)
 			{
 
-				//file.close();
 				return false;
 
 			}

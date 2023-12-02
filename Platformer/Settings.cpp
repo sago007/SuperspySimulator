@@ -274,7 +274,6 @@ namespace Platformer
 	void Settings::ExportSettings()
 	{
 		std::stringstream file;
-		//std::ofstream file(SETTINGS_FILE, std::ios::trunc);
 
 		file << WIDTH_CODE << DELIMITER << windowWidth << std::endl;
 		file << HEIGHT_CODE << DELIMITER << windowHeight << std::endl;
