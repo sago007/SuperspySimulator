@@ -2,6 +2,7 @@
 #include <sstream>
 #include <SDL_image.h>
 #include <iostream>
+#include "physfs.h"
 
 //Custom Includes
 #include "Helpers.h"
@@ -545,7 +546,7 @@ namespace Platformer
 			SDL_Surface* surface = SDL_CreateRGBSurfaceWithFormat(0, rect.w, rect.h, 32, format);
 			SDL_RenderReadPixels(renderer, NULL, surface->format->format, surface->pixels, surface->pitch);
 
-			std::string fileName = "./Assets/Images/Damsels/Damsel" + SaveData::AccessSaveData()->Name() + ".png";
+			std::string fileName = std::string(PHYSFS_getWriteDir()) + "/Assets/Images/Damsels/Damsel" + SaveData::AccessSaveData()->Name() + ".png";
 			IMG_SavePNG(surface, fileName.c_str());
 			SDL_FreeSurface(surface);
 			SDL_DestroyTexture(output);

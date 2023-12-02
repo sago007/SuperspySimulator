@@ -2,6 +2,7 @@
 #include <fstream>
 #include <sstream>
 #include <SDL_image.h>
+#include "physfs.h"
 
 //Custom Includes
 #include "Customizer.h"
@@ -627,6 +628,7 @@ namespace Platformer
 
 			SDL_RenderReadPixels(renderer, NULL, surface->format->format, surface->pixels, surface->pitch);
 
+			output = std::string(PHYSFS_getWriteDir())+"/"+output;
 			IMG_SavePNG(surface, output.c_str());
 
 			SDL_FreeSurface(surface);
@@ -641,6 +643,7 @@ namespace Platformer
 
 		SDL_RenderReadPixels(renderer, NULL, surface->format->format, surface->pixels, surface->pitch);
 
+		koOutput = std::string(PHYSFS_getWriteDir())+"/"+koOutput;
 		IMG_SavePNG(surface, koOutput.c_str());
 
 		SDL_FreeSurface(surface);

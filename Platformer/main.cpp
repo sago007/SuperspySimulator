@@ -44,7 +44,7 @@ const char* const GAMENAME = "SuperSpySimulator";
 int main(int argc, char * argv[])
 {
 	std::string save_folder = getPathToSaveFiles(GAMENAME);
-	std::filesystem::create_directories(save_folder);
+	std::filesystem::create_directories(save_folder+"/Assets/Images/Damsels");
 	PHYSFS_init(argv[0]);
 	PHYSFS_mount(".", "/", 0);
 	PHYSFS_mount("Platformer/Assets", "/Assets/", 0);  //Location used during development
