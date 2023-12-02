@@ -107,15 +107,6 @@ namespace Engine2D
 
 	}
 
-	Vector2& Vector2::operator=(const Vector2& rhs)
-	{
-
-		this->SetX(rhs.X());
-		this->SetY(rhs.Y());
-
-		return *this;
-
-	}
 
 	Vector2& Vector2::operator+=(const Vector2& rhs)
 	{

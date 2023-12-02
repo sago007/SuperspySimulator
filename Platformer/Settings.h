@@ -9,7 +9,7 @@
 
 #define NUM_INPUTS 8
 
-#define SETTINGS_FILE "./Saves/Preferences.ini"
+#define SETTINGS_FILE "Saves/Preferences.ini"
 
 #define DELIMITER "="
 

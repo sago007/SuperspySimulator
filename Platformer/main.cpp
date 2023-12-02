@@ -9,6 +9,8 @@
 #include <sstream>
 #include <math.h>
 #include <time.h>
+#include <filesystem>
+#include <physfs.h>
 
 //Custom Includes
 #include "Helpers.h"
@@ -17,6 +19,7 @@
 #include "MainMenu.h"
 #include "UI.h"
 #include "SaveData.h"
+#include "MultiPlatformAbstraction.hpp"
 
 int windowWidth = 0;
 int windowHeight = 0;
@@ -36,9 +39,18 @@ void LoadUI()
 
 }
 
+const char* const GAMENAME = "SuperSpySimulator";
+
 int main(int argc, char * argv[])
 {
-
+	std::string save_folder = getPathToSaveFiles(GAMENAME);
+	std::filesystem::create_directories(save_folder);
+	PHYSFS_init(argv[0]);
+	PHYSFS_mount(".", "/", 0);
+	PHYSFS_mount("Platformer/Assets", "/Assets/", 0);  //Location used during development
+	PHYSFS_mount("Platformer/Saves", "/Saves/", 0);  //Location used during development
+	PHYSFS_mount(save_folder.c_str(), "/", 0);
+	PHYSFS_setWriteDir(save_folder.c_str());
 	LoadUserPreferences();
 
 	if (SDL_Init(SDL_INIT_VIDEO) < 0)

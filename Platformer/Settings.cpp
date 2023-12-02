@@ -1,10 +1,10 @@
 //Includes
-#include <fstream>
 #include <sstream>
 
 //Custom Includes
 #include "Helpers.h"
 #include "Settings.h"
+#include "MultiPlatformAbstraction.hpp"
 
 void ChangeWindow()
 {
@@ -77,7 +77,8 @@ namespace Platformer
 
 		Settings* settings = Settings::AccessSettings();
 
-		std::ifstream pref("./Saves/Preferences.ini");
+		std::string pref_data = GetFileContent(SETTINGS_FILE);
+		std::stringstream pref(pref_data);
 
 		std::string line;
 		while (std::getline(pref, line))
@@ -186,8 +187,6 @@ namespace Platformer
 
 		}
 
-		pref.close();
-
 	}
 
 	ControlPreference* Settings::Controls()
@@ -274,8 +273,8 @@ namespace Platformer
 
 	void Settings::ExportSettings()
 	{
-
-		std::ofstream file(SETTINGS_FILE, std::ios::trunc);
+		std::stringstream file;
+		//std::ofstream file(SETTINGS_FILE, std::ios::trunc);
 
 		file << WIDTH_CODE << DELIMITER << windowWidth << std::endl;
 		file << HEIGHT_CODE << DELIMITER << windowHeight << std::endl;
@@ -313,7 +312,7 @@ namespace Platformer
 
 		}
 
-		file.close();
+		WriteFileContent(SETTINGS_FILE, file.str());
 
 	}
 

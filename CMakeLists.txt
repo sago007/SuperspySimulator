@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 2.8.9)
+cmake_minimum_required(VERSION 3.5.1...3.27.4)
 project (SuperspySimulator)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${SuperspySimulator_SOURCE_DIR}/Extra/cmake")
 
@@ -14,9 +14,10 @@ pkg_search_module(SDL2MIXER REQUIRED SDL2_mixer)
 pkg_search_module(SDL2IMAGE REQUIRED SDL2_image)
 pkg_search_module(SDL2TTF REQUIRED SDL2_ttf)
 
-file(GLOB SOURCES "Platformer/*.cpp")
+file(GLOB SOURCES "Platformer/*.cpp" "Platformer/Libs/*.cpp")
 
 
 add_executable(SuperspySimulator ${SOURCES})
-target_link_libraries( SuperspySimulator ${SDL2_LIBRARY} stdc++fs m)
-target_link_libraries( SuperspySimulator ${SDL2MIXER_LIBRARIES} ${SDL2IMAGE_LIBRARIES} ${SDL2TTF_LIBRARIES})
+target_link_libraries( SuperspySimulator PRIVATE ${SDL2_LIBRARY} stdc++fs m)
+target_link_libraries( SuperspySimulator PRIVATE ${SDL2MIXER_LIBRARIES} ${SDL2IMAGE_LIBRARIES} ${SDL2TTF_LIBRARIES})
+target_link_libraries( SuperspySimulator PRIVATE physfs)
