@@ -26,7 +26,7 @@ namespace Platformer
 		Weapon(GameEntity* p, float r);
 		virtual ~Weapon();
 
-		static Weapon* LoadWeapon(std::ifstream& file, GameEntity* p);
+		static Weapon* LoadWeapon(std::istream& file, GameEntity* p);
 
 		void Use(std::vector<Attack*>& attacks, Vector2 direction = Vector2(1, 0));
 
@@ -44,7 +44,7 @@ namespace Platformer
 	protected:
 
 		virtual void Fire(std::vector<Attack*>& attacks, Vector2 direction) = 0;
-		virtual void Load(std::ifstream& file) = 0;
+		virtual void Load(std::istream& file) = 0;
 
 		virtual void DataCopy(Weapon* weapon);
 
@@ -85,7 +85,7 @@ namespace Platformer
 	protected:
 
 		void Fire(std::vector<Attack*>& attacks, Vector2 direction) override;
-		void Load(std::ifstream& file) override;
+		void Load(std::istream& file) override;
 
 	//Data
 
@@ -116,7 +116,7 @@ namespace Platformer
 	protected:
 
 		void Fire(std::vector<Attack*>& attacks, Vector2 direction) override;
-		void Load(std::ifstream& file) override;
+		void Load(std::istream& file) override;
 
 	//Data
 	
@@ -150,7 +150,7 @@ namespace Platformer
 	protected:
 
 		void Fire(std::vector<Attack*>& attacks, Vector2 direction) override;
-		void Load(std::ifstream& file) override;
+		void Load(std::istream& file) override;
 
 	//Data
 
@@ -184,7 +184,7 @@ namespace Platformer
 	protected:
 
 		void Fire(std::vector<Attack*>& attacks, Vector2 direction) override;
-		void Load(std::ifstream& file) override;
+		void Load(std::istream& file) override;
 
 	//Data
 

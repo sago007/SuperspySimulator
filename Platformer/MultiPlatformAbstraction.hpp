@@ -27,7 +27,9 @@ SOFTWARE.
 */
 
 #include <string>
+#include <vector>
 
 std::string getPathToSaveFiles(const char* gamename);
 std::string GetFileContent(const char* filename);
 void WriteFileContent(const char* filename, const std::string& content);
+std::vector<std::string> GetFileList(const char* dir);

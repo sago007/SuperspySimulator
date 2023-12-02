@@ -41,6 +41,16 @@ std::string getPathToSaveFiles(const char* gamename) {
 	return sago::getSaveGamesFolder2()+"/"+gamename;
 }
 
+std::vector<std::string> GetFileList(const char* dir) {
+	std::vector<std::string> ret;
+	char** rc = PHYSFS_enumerateFiles(dir);
+	for (char** i = rc; *i != NULL; i++) {
+		ret.push_back(*i);
+	}
+	PHYSFS_freeList(rc);
+	return ret;
+}
+
 void ReadBytesFromFile(const char* filename, std::unique_ptr<char[]>& dest, unsigned int& bytes) {
 	bytes = 0;
 	if (!PHYSFS_exists(filename)) {
@@ -61,15 +71,19 @@ void ReadBytesFromFile(const char* filename, std::unique_ptr<char[]>& dest, unsi
 	bytes = m_size;
 }
 
-std::string GetFileContent(const char* filename) {
+std::string GetFileContent(const char* filename_c) {
+	std::string filename = filename_c;
+	if (filename.length()>2 && filename[0] == '.' && filename[1] == '/') {
+		filename.erase(0, 2);
+	}
 	std::string ret;
-	if (!PHYSFS_exists(filename)) {
+	if (!PHYSFS_exists(filename.c_str())) {
 		std::cerr << "GetFileContent - File does not exists: " << filename << "\n";
 		return ret;
 	}
 	unsigned int m_size = 0;
 	std::unique_ptr<char[]> m_data;
-	ReadBytesFromFile(filename, m_data, m_size);
+	ReadBytesFromFile(filename.c_str(), m_data, m_size);
 	//Now create a std::string
 	ret = std::string(m_data.get(), m_data.get()+m_size);
 	return ret;
@@ -85,9 +99,13 @@ static void CreatePathToFile(const std::string& path) {
 	PHYSFS_mkdir(path2dir.c_str());
 }
 
-void WriteFileContent(const char* filename, const std::string& content) {
+void WriteFileContent(const char* filename_c, const std::string& content) {
+	std::string filename = filename_c;
+	if (filename.length()>2 && filename[0] == '.' && filename[1] == '/') {
+		filename.erase(0, 2);
+	}
 	CreatePathToFile(filename);
-	PHYSFS_file* myfile = PHYSFS_openWrite(filename);
+	PHYSFS_file* myfile = PHYSFS_openWrite(filename.c_str());
 	if (!myfile) {
 		PHYSFS_ErrorCode code = PHYSFS_getLastErrorCode();
 		std::cerr << "Failed to open file for writing, " << PHYSFS_getErrorByCode(code) << " (" << code << ")\n";

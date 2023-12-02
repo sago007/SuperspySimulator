@@ -33,7 +33,7 @@ namespace Platformer
 
 	}
 
-	Weapon* Weapon::LoadWeapon(std::ifstream& file, GameEntity* p)
+	Weapon* Weapon::LoadWeapon(std::istream& file, GameEntity* p)
 	{
 
 		Weapon* weap = NULL;
@@ -253,7 +253,7 @@ namespace Platformer
 
 	}
 
-	void Projectile::Load(std::ifstream& file)
+	void Projectile::Load(std::istream& file)
 	{
 
 		std::string line;
@@ -342,7 +342,7 @@ namespace Platformer
 
 	}
 
-	void SpawnGun::Load(std::ifstream& file)
+	void SpawnGun::Load(std::istream& file)
 	{
 
 		std::getline(file, this->code);
@@ -453,7 +453,7 @@ namespace Platformer
 
 	}
 
-	void Multishot::Load(std::ifstream& file)
+	void Multishot::Load(std::istream& file)
 	{
 
 		std::string line;
@@ -548,7 +548,7 @@ namespace Platformer
 
 	}
 
-	void Melee::Load(std::ifstream& file)
+	void Melee::Load(std::istream& file)
 	{
 
 	}

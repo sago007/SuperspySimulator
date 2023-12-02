@@ -1,14 +1,14 @@
 //Includes
-#include <fstream>
 #include <sstream>
-#include <filesystem>
 #include <iostream>
+#include "physfs.h"
 
 //Custom Includes
 #include "Helpers.h"
 #include "SaveData.h"
 #include "Settings.h"
 #include "Player.h"
+#include "MultiPlatformAbstraction.hpp"
 
 namespace Platformer
 {
@@ -52,18 +52,24 @@ namespace Platformer
 
 	}
 
+	static bool endsWith(const std::string& str, const std::string& suffix)
+	{
+		return str.size() >= suffix.size() && 0 == str.compare(str.size()-suffix.size(), suffix.size(), suffix);
+	}
+
 	std::vector<std::string> SaveData::Characters()
 	{
 
 		std::vector<std::string> characters;
 
-		for (auto& entry : std::filesystem::directory_iterator(SAVE_DIRECTORY))
+		std::vector<std::string> save_folder_content = GetFileList(SAVE_DIRECTORY);
+		for (auto& entry : save_folder_content)
 		{
 
-			if (entry.path().extension().string() == ".plSAV")
+			if (endsWith(entry, ".plSAV"))
 			{
 
-				std::string name = entry.path().filename().string();
+				std::string name = entry;
 				characters.push_back(name.substr(0, name.find(".")));
 				std::cerr << "Pushed: " << characters.back() << "\n";
 			}
@@ -122,8 +128,8 @@ namespace Platformer
 
 	void SaveData::LoadCharacter(std::string fileName)
 	{
-
-		std::ifstream file(fileName);
+		std::string file_content = GetFileContent(fileName.c_str());
+		std::stringstream file(file_content);
 
 		std::string line;
 		std::getline(file, this->name);
@@ -160,8 +166,6 @@ namespace Platformer
 
 		std::getline(file, this->defeatedLevel);
 
-		file.close();
-
 	}
 
 	void SaveData::LoadProgress()
@@ -169,7 +173,8 @@ namespace Platformer
 
 		std::string fileName = SAVE_DIRECTORY;
 		fileName += "Progress.plPRG";
-		std::ifstream file(fileName);
+		std::string file_content = GetFileContent(fileName.c_str());
+		std::stringstream file(file_content);
 
 		std::string line;
 		std::getline(file, line);
@@ -252,8 +257,6 @@ namespace Platformer
 			this->completionRecords[name] = std::pair<int, int>(damsel, dossier);
 
 		}
-
-		file.close();
 
 	}
 
@@ -443,7 +446,7 @@ namespace Platformer
 		if (this->name != n)
 		{
 
-			std::string fileName = "./Saves/" + this->name + ".plSAV";
+			std::string fileName = "Saves/" + this->name + ".plSAV";
 			remove(fileName.c_str());
 
 		}
@@ -467,9 +470,10 @@ namespace Platformer
 
 		std::string last = SAVE_DIRECTORY;
 		last += "LastSave.txt";
-		std::ofstream lastSave(last, std::ios::trunc);
+		std::stringstream lastSave("");
 		lastSave << this->name;
-		lastSave.close();
+
+		WriteFileContent(last.c_str(),lastSave.str());
 
 		this->ExportCharacter();
 		this->ExportProgress();
@@ -478,8 +482,8 @@ namespace Platformer
 
 	void SaveData::ExportCharacter()
 	{
-
-		std::ofstream file(SAVE_DIRECTORY + this->name + ".plSAV", std::ios::trunc);
+		std::stringstream file;
+		//std::ofstream file(SAVE_DIRECTORY + this->name + ".plSAV", std::ios::trunc);
 
 		file << this->name << std::endl;
 		file << this->HairIndex() << " " << this->CostumeIndex() << std::endl;
@@ -491,7 +495,9 @@ namespace Platformer
 
 		file << this->defeatedLevel << std::endl;
 
-		file.close();
+		//file.close();
+		std::string filename = SAVE_DIRECTORY + this->name + ".plSAV";
+		WriteFileContent(filename.c_str(), file.str());
 
 	}
 
@@ -500,7 +506,8 @@ namespace Platformer
 
 		std::string fileName = SAVE_DIRECTORY;
 		fileName += "Progress.plPRG";
-		std::ofstream file(fileName);
+		//std::ofstream file(fileName);
+		std::stringstream file;
 
 		file << this->GetReputation() << " " << this->GetMaxReputation() << std::endl;
 
@@ -536,7 +543,7 @@ namespace Platformer
 
 		}
 
-		file.close();
+		WriteFileContent(fileName.c_str(), file.str());
 
 	}
 
@@ -593,10 +600,11 @@ namespace Platformer
 		{
 
 			delete p->weapon;
-
-			std::ifstream weapon("./Assets/Data/Master/" + this->currentWeapon + ".plWPN");
+			std::string file_content = GetFileContent(std::string("./Assets/Data/Master/" + this->currentWeapon + ".plWPN").c_str());
+			std::stringstream weapon(file_content);
+			//std::ifstream weapon("./Assets/Data/Master/" + this->currentWeapon + ".plWPN");
 			p->weapon = Weapon::LoadWeapon(weapon, p);
-			weapon.close();
+			//weapon.close();
 
 		}
 
@@ -738,9 +746,8 @@ namespace Platformer
 
 	bool SaveData::Exists(std::string name)
 	{
-
-		std::ifstream file(SAVE_DIRECTORY + name + ".plSAV");
-		return file.good();
+		std::string filename = SAVE_DIRECTORY + name + ".plSAV";
+		return PHYSFS_exists(filename.c_str());
 
 	}
 
@@ -753,8 +760,9 @@ namespace Platformer
 
 	bool SaveData::CollectedDamsels()
 	{
+		std::string file_content = GetFileContent("./Saves/Levels.plLVS");
+		std::stringstream file(file_content);
 
-		std::ifstream file("./Saves/Levels.plLVS");
 
 		std::string line;
 		std::getline(file, line);
@@ -783,7 +791,7 @@ namespace Platformer
 			if (this->DamselData(name) < numDamsels)
 			{
 
-				file.close();
+				//file.close();
 				return false;
 
 			}
@@ -795,16 +803,14 @@ namespace Platformer
 		
 		}
 
-		file.close();
-
 		return true;
 
 	}
 
 	bool SaveData::Completed()
 	{
-
-		std::ifstream file("./Saves/Levels.plLVS");
+		std::string file_content = GetFileContent("./Saves/Levels.plLVS");
+		std::stringstream file(file_content);
 
 		std::string line;
 		std::getline(file, line);
@@ -834,7 +840,7 @@ namespace Platformer
 			if (this->DamselData(name) < numDamsels || this->DossierData(name) < numDossiers)
 			{
 
-				file.close();
+				//file.close();
 				return false;
 
 			}
@@ -845,8 +851,6 @@ namespace Platformer
 			std::getline(file, line);
 
 		}
-
-		file.close();
 
 		return true;
 
