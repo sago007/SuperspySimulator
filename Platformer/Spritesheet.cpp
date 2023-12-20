@@ -1,11 +1,11 @@
 //Includes
-#include <fstream>
 #include <sstream>
 #include <SDL_image.h>
 
 //Custom Includes
 #include "Helpers.h"
 #include "Spritesheet.h"
+#include "MultiPlatformAbstraction.hpp"
 
 namespace Engine2D
 {
@@ -231,8 +231,8 @@ namespace Engine2D
 
 	void Spritesheet::LoadSpritesheet(std::string fileName)
 	{
-
-		std::ifstream infile(fileName);
+		std::string file_content = GetFileContent(fileName.c_str());
+		std::istringstream infile(file_content);
 		
 		std::string line;
 		std::getline(infile, line);
@@ -303,9 +303,6 @@ namespace Engine2D
 			this->animations.push_back(newAnimation);
 
 		}
-
-		infile.close();
-
 	}
 
 	void Spritesheet::LoadSurface(std::string fileName)

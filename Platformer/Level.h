@@ -3,7 +3,6 @@
 //Includes
 #include<SDL.h>
 #include <SDL_mixer.h>
-#include <fstream>
 
 //Custom Includes
 #include "CollisionMap.h"
@@ -67,7 +66,7 @@ namespace Platformer
 		void LoadEvents(std::string fileName);
 		void LoadTiles(std::string fileName);
 		void LoadGround(std::string fileName);
-		void LoadSpawners(std::ifstream* file);
+		void LoadSpawners(std::istream* file);
 
 	//Data
 

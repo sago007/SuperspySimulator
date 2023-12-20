@@ -1,7 +1,6 @@
 #pragma once
 
 //Includes
-#include <fstream>
 #include <vector>
 
 //Custom Includes
@@ -41,7 +40,7 @@ namespace Platformer
 
 		virtual void Render(UI* ui, float transparency, float deltaTime) = 0;
 
-		static TriggerCondition* TriggerConditionFactory(std::ifstream& file, Level* l);
+		static TriggerCondition* TriggerConditionFactory(std::istream& file, Level* l);
 
 	protected:
 
@@ -200,7 +199,7 @@ namespace Platformer
 
 		void Render(UI* ui, float deltaTime);
 
-		static Trigger* TriggerFactory(std::ifstream& file, Level* level, std::string n);
+		static Trigger* TriggerFactory(std::istream& file, Level* level, std::string n);
 
 	protected:
 

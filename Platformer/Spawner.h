@@ -2,7 +2,6 @@
 
 //Includes
 #include <vector>
-#include <fstream>
 
 //Custom Includes
 #include "GameObject.h"
@@ -27,7 +26,7 @@ namespace Platformer
 
 		virtual bool Pass(std::vector<GameEntity*>& entities, std::vector<Attack*>& attacks, float deltaTime) = 0;
 
-		static Condition* ConditionFactory(std::ifstream* file, std::string id);
+		static Condition* ConditionFactory(std::istream* file, std::string id);
 
 		virtual void Spawn();
 
@@ -188,7 +187,7 @@ namespace Platformer
 		void Pause() override;
 		void Unpause() override;
 
-		static Spawner* SpawnerFactory(std::ifstream* file);
+		static Spawner* SpawnerFactory(std::istream* file);
 
 	protected:
 

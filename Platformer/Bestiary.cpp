@@ -1,5 +1,4 @@
 //Includes
-#include <fstream>
 #include <sstream>
 #include <SDL_ttf.h>
 
@@ -10,6 +9,7 @@
 #include "SaveData.h"
 #include "Helpers.h"
 #include "Customizer.h"
+#include "MultiPlatformAbstraction.hpp"
 
 namespace Platformer
 {
@@ -49,8 +49,8 @@ namespace Platformer
 
 		if (argc >= 1)
 		{
-
-			std::ifstream file(argv[0]);
+			std::string file_content = GetFileContent(argv[0]);
+			std::istringstream file(file_content);
 
 			std::string line;
 			std::getline(file, line);

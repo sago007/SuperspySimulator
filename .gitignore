@@ -8,3 +8,4 @@ Platformer.vcxproj
 Platformer/Platformer.aps
 *.o
 .deps
+SuperspySimulator.data

@@ -5,6 +5,7 @@
 //Custom Includes
 #include "Helpers.h"
 #include "Settings.h"
+#include "MultiPlatformAbstraction.hpp"
 
 int numKeys;
 const Uint8* currentKeyStates = SDL_GetKeyboardState(&numKeys);
@@ -200,8 +201,9 @@ namespace Engine2D
 
 		if (fileName.size() > 0)
 		{
-
-			SDL_Surface* loadedSurface = IMG_Load(fileName.c_str());
+			std::string data = GetFileContent(fileName.c_str());
+			SDL_RWops* rw = SDL_RWFromMem (data.data(), data.size());
+			SDL_Surface* loadedSurface = IMG_Load_RW(rw, SDL_TRUE);  //SDL_TRUE causes rw to be closed.
 			SDL_Texture* finalSurface = NULL;
 			if (loadedSurface == NULL)
 			{
@@ -236,33 +238,70 @@ namespace Engine2D
 		
 		if (fileName.size() > 0)
 		{
-
-			Mix_Chunk* sound = Mix_LoadWAV(fileName.c_str());
+			std::string data = GetFileContent(fileName.c_str());
+			SDL_RWops* rw = SDL_RWFromMem (data.data(), data.size());
+			Mix_Chunk* sound = Mix_LoadWAV_RW(rw, SDL_TRUE);
+			if (!sound) {
+				std::cerr << "Sound failure with: " << fileName << "\n";
+			}
 			Mix_VolumeChunk(sound, volume);
 
 			return sound;
 
 		}
-
 		return NULL;
 
 	}
 	
-	Mix_Music* LoadMusic(int volume, std::string fileName)
+	// Cached! Do not not free the returnng pointer.
+	Mix_Music* GetMusic(int volume, std::string fileName)
 	{
-
+		static std::map<std::string, Mix_Music*> memory_holder;
+		static std::vector<std::string*> memory_cache;
+		if (memory_holder[fileName]) {
+			return memory_holder[fileName];
+		}
 		if (fileName.size() > 0)
 		{
-
-			Mix_Music* music = Mix_LoadMUS(fileName.c_str());
+			std::string* data = new std::string(GetFileContent(fileName.c_str()));
+			memory_cache.push_back(data); //Store the pointer
+			SDL_RWops* rw = SDL_RWFromMem (data->data(), data->size());
+			Mix_Music* music = Mix_LoadMUS_RW(rw, SDL_FALSE);  //DO not close the RW. We need it for streaming.
+			if (!music) {
+				std::cerr << "Music failure with: " << fileName << "\n";
+			}
 			Mix_VolumeMusic(volume);
+			memory_holder[fileName] = music;
 
 			return music;
 
 		}
-
 		return NULL;
 
+	}
+
+	// Cached! Do not not free the returnng pointer.
+	TTF_Font* GetFont(const std::string& fileName, int fontSize) {
+		std::string font_id = fileName + std::to_string(fontSize);
+		static std::map<std::string, TTF_Font*> memory_holder;
+		static std::vector<std::string*> memory_cache;
+		if (memory_holder[font_id]) {
+			return memory_holder[font_id];
+		}
+		if (fileName.size() > 0)
+		{
+			std::string* data = new std::string(GetFileContent(fileName.c_str()));
+			memory_cache.push_back(data); //Store the pointer
+			SDL_RWops* rw = SDL_RWFromMem (data->data(), data->size());
+			TTF_Font* font = TTF_OpenFontRW(rw, SDL_FALSE, fontSize);
+			if (!font) {
+				printf("Failed to load font: %s\n", fileName.c_str());
+			}
+			memory_holder[font_id] = font;
+
+			return font;
+		}
+		return nullptr;
 	}
 	
 	void PlaySound(Mix_Chunk* sound, AABB* origin, int loops)

@@ -4,7 +4,6 @@
 #include <vector>
 #include <map>
 #include <string>
-#include <fstream>
 
 //Custom Includes
 #include "GameObject.h"
@@ -36,7 +35,7 @@ namespace Platformer
 		virtual Enemy* Clone(Vector2 location, std::string type) = 0;
 
 		static void Spawn(Vector2 location, std::string type, std::string code, std::map<std::string, Enemy*> master, std::vector<GameEntity*>& entities, std::vector<Attack*>& attacks, float deltaTime);
-		static Enemy* EnemyFactory(std::ifstream* file, std::string code, Level* l);
+		static Enemy* EnemyFactory(std::istream* file, std::string code, Level* l);
 
 		const char* Type() override;
 

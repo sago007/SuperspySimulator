@@ -77,7 +77,8 @@ namespace Engine2D
 
 	SDL_Texture* LoadTexture(std::string fileName);
 	Mix_Chunk* LoadSound(int volume, std::string fileName);
-	Mix_Music* LoadMusic(int volume, std::string fileName);
+	Mix_Music* GetMusic(int volume, std::string fileName);
+	TTF_Font* GetFont(const std::string& fileName, int fontSize);
 
 	void PlaySound(Mix_Chunk* sound, AABB* origin, int loops);
 	void PumpSounds(Vector2 world);

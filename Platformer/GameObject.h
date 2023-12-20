@@ -3,7 +3,6 @@
 //Includes
 #include <SDL_mixer.h>
 #include <vector>
-#include <fstream>
 
 //Custom Includes
 #include "AABB.h"
@@ -83,7 +82,7 @@ namespace Platformer
 		GameEntity(Level* l, int mH, int d, float x, float y, float w, float h);
 		virtual ~GameEntity();
 
-		void LoadEntity(std::ifstream& file, bool close = false);
+		void LoadEntity(std::istream& file);
 		void LoadSpritesheet(std::string file, std::string imageFile);
 
 		virtual void Update(std::vector<GameEntity*>& entities, std::vector<Attack*>& attacks, float deltaTime);
@@ -128,7 +127,7 @@ namespace Platformer
 
 	protected:
 
-		virtual void Load(std::ifstream& file);
+		virtual void Load(std::istream& file);
 
 	//Data
 

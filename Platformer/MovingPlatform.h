@@ -1,8 +1,5 @@
 #pragma once
 
-//Includes
-#include <fstream>
-
 //Custom Includes
 #include "GameObject.h"
 
@@ -25,7 +22,7 @@ namespace Platformer
 		virtual Vector2 Update(float deltaTime) = 0;
 		virtual bool Condition(GameObject* obj, Vector2 velocity, float deltaTime) = 0;
 
-		static MovingPlatform* MovingPlatformFactory(std::ifstream* file);
+		static MovingPlatform* MovingPlatformFactory(std::istream* file);
 
 		virtual void Trigger();
 

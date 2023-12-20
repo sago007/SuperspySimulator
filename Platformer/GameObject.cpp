@@ -164,7 +164,7 @@ namespace Platformer
 
 	}
 
-	void GameEntity::LoadEntity(std::ifstream& input, bool close)
+	void GameEntity::LoadEntity(std::istream& input)
 	{
 
 		std::string line;
@@ -221,14 +221,6 @@ namespace Platformer
 		this->rOffset = Vector2(xR, yR);
 
 		this->Load(input);
-
-		if (close)
-		{
-
-			input.close();
-
-		}
-
 	}
 
 	void GameEntity::LoadSpritesheet(std::string fileName, std::string imageFile)
@@ -459,7 +451,7 @@ namespace Platformer
 
 	}
 
-	void GameEntity::Load(std::ifstream& file)
+	void GameEntity::Load(std::istream& file)
 	{
 
 	}

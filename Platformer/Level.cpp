@@ -9,6 +9,7 @@
 #include "Level.h"
 #include "Platformer.h"
 #include "SaveData.h"
+#include "MultiPlatformAbstraction.hpp"
 
 #define DATA_DIRECTORY "./Assets/Data/"
 #define COLLISION_DIRECTORY "Collision/"
@@ -137,7 +138,7 @@ namespace Platformer
 		{
 
 			Mix_HaltMusic();
-			Mix_FreeMusic(this->music);
+			//Mix_FreeMusic(this->music);  -- Cached DO NOT FREE
 			this->music = NULL;
 
 		}
@@ -161,10 +162,8 @@ namespace Platformer
 		std::string evnt = EVENT_DIRECTORY;
 		std::string render = RENDER_DIRECTORY;
 
-		std::ifstream file(fileName);
-		if (!file.is_open()) {
-			std::cerr << "Failed to open " << fileName << "\n";
-		}
+		std::string content = GetFileContent(fileName.c_str());
+		std::istringstream file(content);
 		std::string line;
 
 		std::getline(file, line);
@@ -218,7 +217,7 @@ namespace Platformer
 		this->LoadTiles(data + render + line);
 
 		std::getline(file, line);
-		this->music = LoadMusic(Settings::AccessSettings()->MusicVolume(), line);
+		this->music = GetMusic(Settings::AccessSettings()->MusicVolume(), line);
 
 		this->LoadSpawners(&file);
 
@@ -260,10 +259,8 @@ namespace Platformer
 
 		std::string base = IMAGE_DIRECTORY;
 
-		std::ifstream file(fileName);
-		if (!file.is_open()) {
-			std::cerr << "Failed to open " << fileName << "\n";
-		}
+		std::string content = GetFileContent(fileName.c_str());
+		std::istringstream file(content);
 
 		std::string line;
 		std::getline(file, line);
@@ -371,8 +368,6 @@ namespace Platformer
 		SDL_DestroyTexture(tileset);
 		tileset = NULL;
 
-		file.close();
-
 	}
 
 	void Level::LoadCollision(std::string fileName)
@@ -384,16 +379,13 @@ namespace Platformer
 
 	void Level::LoadMaster(std::string fileName)
 	{
-
-		std::ifstream file(fileName);
-		if (!file.is_open()) {
-			std::cerr << "Failed to open " << fileName << "\n";
-		}
+		std::string content = GetFileContent(fileName.c_str());
+		std::istringstream file(content);
 
 		std::string line;
 		std::getline(file, line);
 
-		std::stringstream input(line);
+		std::istringstream input(line);
 
 		int numMasterEnemies;
 		input >> numMasterEnemies;
@@ -405,23 +397,18 @@ namespace Platformer
 			this->master[line] = Enemy::EnemyFactory(&file, line, this);
 
 		}
-
-		file.close();
-
 	}
 
 	void Level::LoadEvents(std::string fileName)
 	{
 
-		std::ifstream file(fileName);
-		if (!file.is_open()) {
-			std::cerr << "Failed to open " << fileName << "\n";
-		}
+		std::string content = GetFileContent(fileName.c_str());
+		std::istringstream file(content);
 
 		std::string line;
 		std::getline(file, line);
 
-		std::stringstream input(line);
+		std::istringstream input(line);
 
 		int numEvents;
 		input >> numEvents;
@@ -634,11 +621,9 @@ namespace Platformer
 
 						Breakable* breakableMaster = new Breakable(code);
 						breakableMaster->SetLevel(this);
-						auto lineStream = std::ifstream(line);
-						if (!file.is_open()) {
-							std::cerr << "Failed to open " << fileName << "\n";
-						}
-						breakableMaster->LoadEntity(lineStream, true);
+						std::string line_content = GetFileContent(line.c_str());
+						std::istringstream lineStream(line_content);
+						breakableMaster->LoadEntity(lineStream);
 
 						this->breakables[line] = breakableMaster;
 
@@ -694,11 +679,8 @@ namespace Platformer
 
 	void Level::LoadGround(std::string fileName)
 	{
-
-		std::ifstream file(fileName);
-		if (!file.is_open()) {
-			std::cerr << "Failed to open " << fileName << "\n";
-		}
+		std::string content = GetFileContent(fileName.c_str());
+		std::istringstream file(content);
 
 		std::string line;
 		std::getline(file, line);
@@ -797,12 +779,9 @@ namespace Platformer
 			this->foregroundSheets[i]->PlayAnimation(0, true);
 
 		}
-
-		file.close();
-
 	}
 
-	void Level::LoadSpawners(std::ifstream* file)
+	void Level::LoadSpawners(std::istream* file)
 	{
 
 		int numSpawners;

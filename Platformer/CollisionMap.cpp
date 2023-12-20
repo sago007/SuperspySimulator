@@ -1,11 +1,11 @@
 //Includes
-#include <fstream>
 #include <sstream>
 #include <iostream>
 
 //Custom Includes
 #include "Helpers.h"
 #include "CollisionMap.h"
+#include "MultiPlatformAbstraction.hpp"
 
 namespace Platformer
 {
@@ -40,11 +40,8 @@ namespace Platformer
 
 	void CollisionMap::LoadCollisionMap(std::string fileName)
 	{
-
-		std::ifstream file(fileName);
-		if (!file.is_open()) {
-			std::cerr << "Failed to open " << fileName << "\n";
-		}
+		std::string file_content = GetFileContent(fileName.c_str());
+		std::istringstream file(file_content);
 		std::string line;
 
 		std::getline(file, line);
@@ -115,9 +112,6 @@ namespace Platformer
 			this->moving.push_back(MovingPlatform::MovingPlatformFactory(&file));
 
 		}
-
-		file.close();
-
 	}
 
 	void CollisionMap::Update(std::vector<GameEntity*>& movable, float deltaTime)

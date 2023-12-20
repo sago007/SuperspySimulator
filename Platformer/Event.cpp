@@ -22,7 +22,7 @@ namespace Platformer
 
 	}
 
-	TriggerCondition* TriggerCondition::TriggerConditionFactory(std::ifstream& file, Level* l)
+	TriggerCondition* TriggerCondition::TriggerConditionFactory(std::istream& file, Level* l)
 	{
 
 		TriggerCondition* newCondition = NULL;
@@ -314,7 +314,7 @@ namespace Platformer
 
 	}
 
-	Trigger* Trigger::TriggerFactory(std::ifstream& file, Level* level, std::string n)
+	Trigger* Trigger::TriggerFactory(std::istream& file, Level* level, std::string n)
 	{
 
 		Trigger* newTrigger = NULL;

@@ -85,7 +85,7 @@ namespace Platformer
 
 	protected:
 
-		void Load(std::ifstream& file) override;
+		void Load(std::istream& file) override;
 
 		bool ShouldMove() override;
 

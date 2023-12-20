@@ -311,7 +311,7 @@ namespace Platformer
 
 	}
 
-	MovingPlatform* MovingPlatform::MovingPlatformFactory(std::ifstream* file)
+	MovingPlatform* MovingPlatform::MovingPlatformFactory(std::istream* file)
 	{
 
 		MovingPlatform* newPlatform = NULL;

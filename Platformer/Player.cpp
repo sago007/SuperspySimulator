@@ -345,7 +345,7 @@ namespace Platformer
 
 	}
 
-	void Player::Load(std::ifstream& file)
+	void Player::Load(std::istream& file)
 	{
 
 		this->weapon = Weapon::LoadWeapon(file, this);

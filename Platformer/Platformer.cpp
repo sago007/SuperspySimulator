@@ -11,6 +11,7 @@
 #include "CharacterSelect.h"
 #include "ResultsScreen.h"
 #include "Event.h"
+#include "MultiPlatformAbstraction.hpp"
 
 namespace Platformer
 {
@@ -90,11 +91,9 @@ namespace Platformer
 
 			this->LoadLevel(argv[0], spawn);
 
-			auto arg2stream = std::ifstream(argv[2]);
-			if (!arg2stream.is_open()) {
-				std::cerr << "Failed to open " << argv[2] << "\n";
-			}
-			this->player->LoadEntity(arg2stream, true);
+			std::string file_content = GetFileContent(argv[2]);
+			std::istringstream arg2stream(file_content);
+			this->player->LoadEntity(arg2stream);
 
 			this->player->Move(this->level->SpawnIndex(spawn));
 

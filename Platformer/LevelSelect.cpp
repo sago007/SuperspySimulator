@@ -11,6 +11,7 @@
 #include "Settings.h"
 #include "SaveData.h"
 #include "Customizer.h"
+#include "MultiPlatformAbstraction.hpp"
 
 namespace Platformer
 {
@@ -29,11 +30,8 @@ namespace Platformer
 
 		if (argc > 1)
 		{
-
-			std::ifstream file(argv[0]);
-			if (!file.is_open()) {
-				std::cerr << "Failed to open " << argv[0] << "\n";
-			}
+			std::string file_content = GetFileContent(argv[0]);
+			std::istringstream file(file_content);
 
 			std::string line;
 			std::getline(file, line);
@@ -71,8 +69,6 @@ namespace Platformer
 				this->levelSurfaces.push_back(LoadTexture(line));
 
 			}
-
-			file.close();
 
 			this->frame = LoadTexture(argv[1]);
 
@@ -424,7 +420,7 @@ namespace Platformer
 		surface = SDL_CreateRGBSurfaceWithFormat(0, rect.w, rect.h, 32, format);
 		SDL_RenderReadPixels(renderer, NULL, surface->format->format, surface->pixels, surface->pitch);
 
-		IMG_SavePNG(surface, (std::string(PHYSFS_getWriteDir())+ "./Assets/Images/HeroineKO.png").c_str());
+		IMG_SavePNG(surface, (std::string(PHYSFS_getWriteDir())+ "/Assets/Images/HeroineKO.png").c_str());
 		SDL_FreeSurface(surface);
 		SDL_DestroyTexture(output);
 

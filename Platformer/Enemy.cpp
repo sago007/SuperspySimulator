@@ -130,7 +130,7 @@ namespace Platformer
 
 	}
 
-	Enemy* Enemy::EnemyFactory(std::ifstream* file, std::string code, Level* l)
+	Enemy* Enemy::EnemyFactory(std::istream* file, std::string code, Level* l)
 	{
 
 		Enemy* newEnemy = NULL;

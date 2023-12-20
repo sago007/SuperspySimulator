@@ -5,10 +5,10 @@ There is still a nasty bug causing defeat triggers to fire too many times but wh
 
 To compile and run:
 ```
+bash buildpackage_dev.sh
 mkdir -p build
 cd build
-cp -r ../Platformer/Assets ./
-cp -r ../Platformer/Saves ./
+cp ../SuperSpySimulator.data ./
 cmake ..
 make
 ./SuperspySimulator

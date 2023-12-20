@@ -1,10 +1,10 @@
 //Includes
-#include <fstream>
 #include <sstream>
 
 //Custom Includes
 #include "GameState.h"
 #include "Helpers.h"
+#include "MultiPlatformAbstraction.hpp"
 
 namespace Engine2D
 {
@@ -215,7 +215,6 @@ namespace Engine2D
 		if (this->font)
 		{
 
-			TTF_CloseFont(this->font);
 			this->font = NULL;
 
 		}
@@ -250,7 +249,7 @@ namespace Engine2D
 		if (this->bgm)
 		{
 
-			Mix_FreeMusic(this->bgm);
+			//Mix_FreeMusic(this->bgm);  Global cache. Do not free
 			this->bgm = NULL;
 
 		}
@@ -337,12 +336,12 @@ namespace Engine2D
 
 	void MenuState::MenuFactory(std::string fileName, int volume)
 	{
-
-		std::ifstream file(fileName);
+		std::string file_content = GetFileContent(fileName.c_str());
+		std::istringstream file(file_content);
 
 		std::string music;
 		std::getline(file, music);
-		this->bgm = LoadMusic(volume, music);
+		this->bgm = GetMusic(volume, music);
 
 		std::string fontName;
 		std::getline(file, fontName);
@@ -370,7 +369,7 @@ namespace Engine2D
 		int textSize;
 		input >> textSize;
 
-		this->font = TTF_OpenFont(fontName.c_str(), textSize);
+		this->font = GetFont(fontName, textSize);
 
 		std::getline(file, line);
 		input.clear();
@@ -550,9 +549,6 @@ namespace Engine2D
 			this->inputs[name] = newInput;
 
 		}
-
-		file.close();
-
 	}
 
 	SplashPage::SplashPage(GameState* n)
@@ -607,7 +603,6 @@ namespace Engine2D
 		if (this->font)
 		{
 
-			TTF_CloseFont(this->font);
 			this->font = NULL;
 
 		}
@@ -624,8 +619,8 @@ namespace Engine2D
 
 		if (argc >= 1)
 		{
-
-			std::ifstream file(argv[0]);
+			std::string file_content = GetFileContent(argv[0]);
+			std::istringstream file(file_content);
 
 			std::string line;
 			std::getline(file, line);
@@ -741,8 +736,7 @@ namespace Engine2D
 
 				input >> fontName;
 				input >> fontSize;
-				this->font = TTF_OpenFont(fontName.c_str(), fontSize);
-
+				this->font = GetFont(fontName, fontSize);
 			}
 
 			for (int i = 0; i < numText; i++)
@@ -784,9 +778,6 @@ namespace Engine2D
 				this->text.push_back(newData);
 
 			}
-
-			file.close();
-
 		}
 
 		this->startTime = GetTime();

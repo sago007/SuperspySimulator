@@ -4,7 +4,6 @@
 #include <SDL.h>
 #include <SDL_mixer.h>
 #include <vector>
-#include <fstream>
 
 //Custom Includes
 #include "Vector2.h"

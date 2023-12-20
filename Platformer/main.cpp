@@ -4,7 +4,6 @@
 #include <SDL_mixer.h>
 #include <stdio.h>
 #include <string>
-#include <fstream>
 #include <iostream>
 #include <sstream>
 #include <math.h>
@@ -39,13 +38,20 @@ void LoadUI()
 
 }
 
-const char* const GAMENAME = "SuperSpySimulator";
+const char* const GAMENAME = "SuperspySimulator";
 
 int main(int argc, char * argv[])
 {
 	std::string save_folder = getPathToSaveFiles(GAMENAME);
 	std::filesystem::create_directories(save_folder+"/Assets/Images/Damsels");
 	PHYSFS_init(argv[0]);
+	std::string packname = PHYSFS_getBaseDir();
+	packname += "/SuperspySimulator.data";
+	printf("Mounting %s\n", packname.c_str());
+	int success = PHYSFS_mount(packname.c_str(), "/", 0);
+	if (!success) {
+		printf("Failed to mount %s. Error code: %d. Error message: %s\n", packname.c_str(),  PHYSFS_getLastErrorCode(), PHYSFS_getLastError());
+	}
 	PHYSFS_mount(".", "/", 0);
 	PHYSFS_mount("Platformer/Assets", "/Assets/", 0);  //Location used during development
 	PHYSFS_mount("Platformer/Saves", "/Saves/", 0);  //Location used during development
@@ -93,7 +99,11 @@ int main(int argc, char * argv[])
 				{
 
 					TTF_Init();
-					Mix_OpenAudio(MIX_DEFAULT_FREQUENCY, MIX_DEFAULT_FORMAT, 2, 4096);
+					int error_code = Mix_OpenAudio(MIX_DEFAULT_FREQUENCY, MIX_DEFAULT_FORMAT, 2, 4096);
+					if (error_code) {
+						printf("Could not initialize SDL Mixer library. Error: %s\n", Mix_GetError());
+						exit(1);
+					}
 
 					SDL_RenderSetLogicalSize(renderer, PLATFORMER_TARGET_WIDTH, PLATFORMER_TARGET_HEIGHT);
 
@@ -102,14 +112,10 @@ int main(int argc, char * argv[])
 					PrepareBlank();
 
 					LoadUI();
-
-					std::ifstream lastSave("./Saves/LastSave.txt");
-					if (!lastSave.is_open()) {
-						std::cerr << "Failed to open " << "./Saves/LastSave.txt" << "\n";
-					}
+					std::string file_content = GetFileContent("Saves/LastSave.txt");
+					std::stringstream lastSave(file_content);
 					std::string name;
 					std::getline(lastSave, name);
-					lastSave.close();
 
 					Platformer::SaveData::LoadSaveData("./Saves/" + name + ".plSAV");
 

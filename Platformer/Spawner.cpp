@@ -48,7 +48,7 @@ namespace Platformer
 
 	}
 
-	Condition* Condition::ConditionFactory(std::ifstream* file, std::string id)
+	Condition* Condition::ConditionFactory(std::istream* file, std::string id)
 	{
 
 		std::string input;
@@ -411,7 +411,7 @@ namespace Platformer
 
 	}
 
-	Spawner* Spawner::SpawnerFactory(std::ifstream* file)
+	Spawner* Spawner::SpawnerFactory(std::istream* file)
 	{
 
 		Spawner* newSpawner = NULL;

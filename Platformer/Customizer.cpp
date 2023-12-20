@@ -1,5 +1,4 @@
 //Includes
-#include <fstream>
 #include <sstream>
 #include <SDL_image.h>
 #include "physfs.h"
@@ -11,6 +10,7 @@
 #include "SaveData.h"
 #include "Settings.h"
 #include "StatsMenu.h"
+#include "MultiPlatformAbstraction.hpp"
 
 namespace Platformer
 {
@@ -179,7 +179,8 @@ namespace Platformer
 		SDL_QueryTexture(this->koBase, NULL, NULL, &w, &h);
 		this->koOutput = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_TARGET, w, h);
 
-		std::ifstream file(options);
+		std::string file_content = GetFileContent(options.c_str());
+		std::istringstream file(file_content);
 
 		std::string line;
 		std::getline(file, line);

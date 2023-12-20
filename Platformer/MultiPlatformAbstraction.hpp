@@ -28,6 +28,7 @@ SOFTWARE.
 
 #include <string>
 #include <vector>
+#include <sstream>
 
 std::string getPathToSaveFiles(const char* gamename);
 std::string GetFileContent(const char* filename);

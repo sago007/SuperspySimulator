@@ -8,6 +8,7 @@
 #include "Settings.h"
 #include "SaveData.h"
 #include "ScriptedAction.h"
+#include "MultiPlatformAbstraction.hpp"
 
 using namespace Engine2D;
 
@@ -84,10 +85,7 @@ namespace Platformer
 
 		if (this->uiFont)
 		{
-
-			TTF_CloseFont(this->uiFont);
 			this->uiFont = NULL;
-
 		}
 
 		if (this->iconData)
@@ -149,8 +147,8 @@ namespace Platformer
 
 	void UI::LoadUI(std::string fileName)
 	{
-
-		std::ifstream file(fileName);
+		std::string file_content = GetFileContent(fileName.c_str());
+		std::stringstream file(file_content);
 
 		std::string line;
 		std::getline(file, line);
@@ -250,7 +248,7 @@ namespace Platformer
 		input >> textSize;
 		input >> this->textHeightOffset;
 
-		this->uiFont = TTF_OpenFont(font.c_str(), textSize);
+		this->uiFont = GetFont(font, textSize);
 
 		std::getline(file, line);
 		input.clear();
@@ -326,8 +324,6 @@ namespace Platformer
 		input >> this->inventoryY;
 		input >> this->inventoryStep;
 		input >> this->inventoryPerLine;
-
-		file.close();
 
 		SDL_SetTextureAlphaMod(this->healthBackground, UI_TRANSPARENCY);
 		SDL_SetTextureAlphaMod(this->healthSurface, UI_TRANSPARENCY);
