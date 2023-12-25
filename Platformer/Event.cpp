@@ -103,7 +103,6 @@ namespace Platformer
 
 	AndTrigger::AndTrigger(TriggerCondition* p, TriggerCondition* q)
 	{
-
 		this->p = p;
 		this->q = q;
 
@@ -132,14 +131,8 @@ namespace Platformer
 
 	bool AndTrigger::Condition(Player* player)
 	{
-		bool ret = this->p->Condition(player) && this->q->Condition(player);
-		if (!ret) {
-			SingleTrigger* st = dynamic_cast<SingleTrigger*>(this->p);
-			DefeatTrigger* df = dynamic_cast<DefeatTrigger*>(this->q);
-			if (st && df) {
-				st->fired = false;
-			}
-		}
+		// Order is quite important here. Single trigger has a side effect when called and must be the second call.
+		bool ret = this->q->Condition(player) && this->p->Condition(player);
 		return ret;
 
 	}

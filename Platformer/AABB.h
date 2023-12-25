@@ -46,11 +46,11 @@ namespace Engine2D
 
 	protected:
 
-		float x;
-		float y;
+		float x = 0.0f;
+		float y = 0.0f;
 
-		float width;
-		float height;
+		float width = 0.0f;
+		float height = 0.0f;
 
 	};
 
