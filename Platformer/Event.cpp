@@ -92,7 +92,6 @@ namespace Platformer
 		}
 		else
 		{
-
 			newCondition = new SingleTrigger();
 
 		}
@@ -131,10 +130,17 @@ namespace Platformer
 
 	bool AndTrigger::Condition(Player* player)
 	{
-		// Order is quite important here. Single trigger has a side effect when called and must be the second call.
-		bool ret = this->q->Condition(player) && this->p->Condition(player);
-		return ret;
+		bool ret = this->p->Condition(player) && this->q->Condition(player);
 
+		if (!ret) {
+			SingleTrigger* st = dynamic_cast<SingleTrigger*>(this->p);
+			DefeatTrigger* df = dynamic_cast<DefeatTrigger*>(this->q);
+
+			if (st && df) {
+				st->fired = false;
+			}
+		}
+		return ret;
 	}
 
 	void AndTrigger::Render(UI* ui, float transparency, float deltaTime)
@@ -225,7 +231,6 @@ namespace Platformer
 	bool DefeatTrigger::Condition(Player* player)
 	{
 		bool condition = !this->platformer->SearchType(this->name);
-		std::cerr << "Testing trigger " << this->name << " " << condition << "\n";
 		return condition;
 
 	}
