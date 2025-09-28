@@ -88,7 +88,6 @@ namespace Platformer
 
 	void Enemy::Die()
 	{
-		std::cerr << "Enemy::Die\n";
 		this->active = false;
 
 		this->level->EnemyDied(this->Center());

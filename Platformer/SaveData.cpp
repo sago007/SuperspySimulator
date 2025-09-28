@@ -71,7 +71,6 @@ namespace Platformer
 
 				std::string name = entry;
 				characters.push_back(name.substr(0, name.find(".")));
-				std::cerr << "Pushed: " << characters.back() << "\n";
 			}
 
 		}

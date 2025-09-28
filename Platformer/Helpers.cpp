@@ -207,7 +207,6 @@ namespace Engine2D
 			SDL_Texture* finalSurface = NULL;
 			if (loadedSurface == NULL)
 			{
-				std::cerr << "Failed to load " << fileName << "\n";
 				return NULL;
 			}
 			else

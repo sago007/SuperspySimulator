@@ -165,7 +165,6 @@ namespace Platformer
 
 		if (!this->fired)
 		{
-			std::cerr << "Fired single trigger\n";
 			this->fired = true;
 
 			return true;
@@ -217,7 +216,6 @@ namespace Platformer
 
 	DefeatTrigger::DefeatTrigger(std::string n, Platformer* p)
 	{
-		std::cerr << "DefeatTrigger created " << n << "\n";
 		this->name = n;
 		this->platformer = p;
 
@@ -225,7 +223,6 @@ namespace Platformer
 
 	DefeatTrigger::~DefeatTrigger()
 	{
-		std::cerr << "Removed DefeatTrigger " << name << "\n";
 	}
 
 	bool DefeatTrigger::Condition(Player* player)
@@ -341,7 +338,6 @@ namespace Platformer
 			input.str(line);
 
 			input >> index;
-			std::cerr << "PlatformTrigger line: " << line << "\n";
 			newTrigger = new PlatformTrigger(level->Collision(), index, x, y, w, h);
 
 		}
@@ -493,7 +489,6 @@ namespace Platformer
 
 	PlatformTrigger::PlatformTrigger(CollisionMap* col, int i, float x, float y, float w, float h) : Trigger(x, y, w, h)
 	{
-		std::cerr << "Created PlatformTrigger\n";
 		this->collisionMap = col;
 		this->index = i;
 
@@ -501,7 +496,6 @@ namespace Platformer
 
 	PlatformTrigger::~PlatformTrigger()
 	{
-		std::cerr << "Removed PlatformTrigger\n";
 	}
 
 	void PlatformTrigger::Update(Player* player, float deltaTime)
@@ -520,7 +514,6 @@ namespace Platformer
 
 	DoorTrigger::DoorTrigger(std::string l, int s, float x, float y, float w, float h) : Trigger(x, y, w, h)
 	{
-		std::cerr << "Created DoorTrigger - " << l << "\n";
 		this->level = l;
 		this->spawnIndex = s;
 
@@ -631,7 +624,6 @@ namespace Platformer
 
 	TriggerTrigger::TriggerTrigger(Trigger* t, std::string n, Level* lvl, bool f, int i, int l, float x, float y, float w, float h) : Trigger(x, y, w, h)
 	{
-		std::cerr << "Creating TriggerTrigger " << name << "\n";
 		this->trigger = t;
 		this->level = lvl;
 
@@ -701,7 +693,6 @@ namespace Platformer
 
 	void Breakable::Die()
 	{
-		std::cerr << "Die! " << this->code << "\n";
 		this->level->Collision()->Unregister(this->code);
 		this->GameEntity::Die();
 
